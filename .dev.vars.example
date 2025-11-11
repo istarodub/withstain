@@ -1,0 +1,9 @@
+# Local Development Environment Variables
+# Copy this file to .dev.vars and fill in your actual values
+# DO NOT commit .dev.vars to git!
+
+# Resend API Key (get from https://resend.com/api-keys)
+RESEND_API_KEY=your_resend_api_key_here
+
+# Email address to receive subscription notifications
+NOTIFICATION_EMAIL=your-email@example.com

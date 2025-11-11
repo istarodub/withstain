@@ -1,0 +1,57 @@
+---
+layout: base.njk
+title: Articles
+permalink: /articles/
+description: Evidence-based insights on longevity, nutrition, exercise, sleep, and mental health. Practical guidance for living longer and living well.
+---
+
+<div class="blog-page">
+  <section class="page-intro fade-in">
+    <h1>Latest Insights</h1>
+    <p class="lead">Insights and stories exploring longevity, health, and self-optimization.</p>
+  </section>
+
+  <section class="blog-posts-section fade-in">
+    <ul class="post-list">
+      {%- for post in collections.posts | reverse -%}
+      <li class="post-list-item">
+        <a href="{{ post.url }}" class="post-card-link">
+          <div class="post-card-image">
+            {%- if post.data.image -%}
+              <img src="{{ post.data.image | replace('-hero.jpg', '-thumb.jpg') }}" alt="{{ post.data.title }}" loading="lazy">
+            {%- else -%}
+              <span class="material-icons">article</span>
+            {%- endif -%}
+          </div>
+          <div class="post-card-content">
+            <div class="post-card-header">
+              <h2>{{ post.data.title }}</h2>
+            </div>
+            {% if post.data.preview %}
+              <p class="post-excerpt">{{ post.data.preview }}</p>
+            {% elif post.data.description %}
+              <p class="post-excerpt">{{ post.data.description }}</p>
+            {% endif %}
+            <div class="post-card-footer">
+              {% if post.data.tags %}
+                <div class="post-tags">
+                  {% for tag in post.data.tags %}
+                    <span class="tag">{{ tag | formatTag }}</span>
+                  {% endfor %}
+                </div>
+              {% endif %}
+              <time datetime="{{ post.date | dateToFormat('yyyy-MM-dd') }}" class="post-date">{{ post.date | readableDate }}</time>
+            </div>
+          </div>
+        </a>
+      </li>
+      {%- endfor -%}
+    </ul>
+
+    {% if collections.posts.length === 0 %}
+    <div class="no-posts">
+      <p>More articles coming soon – check back for regular updates on living longer and better.</p>
+    </div>
+    {% endif %}
+  </section>
+</div>

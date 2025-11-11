@@ -1,0 +1,140 @@
+---
+layout: base.njk
+---
+
+<article class="post">
+  <header class="post-header">
+    <h1 class="post-title">{{ title }}</h1>
+    <div class="post-meta">
+      <div class="post-meta-row">
+        <time datetime="{{ date | dateToFormat('yyyy-MM-dd') }}">{{ date | readableDate }}</time>
+        <span class="post-meta-separator">•</span>
+        <span class="post-reading-time">{{ content | readingTime }} min read</span>
+      </div>
+      {% if tags %}
+        <div class="post-tags">
+          {% for tag in tags %}
+            <a href="/topics/{{ tag | slugify }}/" class="tag">{{ tag | formatTag }}</a>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+    {% if image %}
+      <img src="{{ image }}" alt="{{ title }}" class="post-image">
+      {% if imageCredit %}
+        <p class="image-credit">{{ imageCredit }}</p>
+      {% endif %}
+    {% endif %}
+  </header>
+
+  {% set tocItems = content | generateTOC(title) %}
+  {% if tocItems.length > 0 %}
+  <aside class="table-of-contents">
+    <h2 class="toc-title">Table of Contents</h2>
+    <nav class="toc-nav">
+      <ul class="toc-list">
+        {% for item in tocItems %}
+        <li class="toc-item toc-level-{{ item.level }}">
+          <a href="#{{ item.id }}" class="toc-link">{{ item.text }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+    </nav>
+  </aside>
+  {% endif %}
+
+  <div class="post-content">
+    {{ content | safe }}
+  </div>
+
+  {%- if tags -%}
+  {%- set relatedTools = [] -%}
+  {%- for tag in tags -%}
+    {%- if toolTopicMappings.topicToTools[tag] and toolTopicMappings.topicToTools[tag].length > 0 -%}
+      {%- for toolId in toolTopicMappings.topicToTools[tag] -%}
+        {%- if toolId not in relatedTools -%}
+          {%- set relatedTools = (relatedTools.push(toolId), relatedTools) -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+  {%- endfor -%}
+
+  {%- if relatedTools.length > 0 -%}
+    {%- set toolId = relatedTools[0] -%}
+    {%- set tool = toolTopicMappings.tools[toolId] -%}
+    <div class="post-tool-cta" data-cta-type="tool" data-cta-tool="{{ toolId }}">
+      <div class="post-tool-cta-content">
+        <span class="material-icons post-tool-cta-icon">assessment</span>
+        <div class="post-tool-cta-text">
+          <h3>{{ tool.name }}</h3>
+          <p>{{ tool.description }}</p>
+        </div>
+        <a href="{{ tool.url }}" class="post-tool-cta-button">{{ tool.ctaText }}</a>
+      </div>
+    </div>
+    {# Newsletter fallback when tool is completed #}
+    <div class="post-subscribe-cta" data-cta-type="newsletter" data-cta-fallback="true" style="display: none;">
+      {% set componentId = "post-" + (title | slugify) %}
+      {% include "subscribe-block.njk" %}
+    </div>
+  {%- else -%}
+    <div class="post-subscribe-cta" data-cta-type="newsletter">
+      {% set componentId = "post-" + (title | slugify) %}
+      {% include "subscribe-block.njk" %}
+    </div>
+  {%- endif -%}
+  {%- endif -%}
+</article>
+
+{%- set relatedPostsData = collections.posts | relatedPosts(page.url, tags, 3) -%}
+{%- if relatedPostsData.length > 0 -%}
+<section class="related-posts">
+  <div class="related-posts-header">
+    <h2>Read Next</h2>
+    <p>Continue exploring related topics</p>
+  </div>
+  <ul class="post-list">
+    {%- for item in relatedPostsData -%}
+    {%- set relatedPost = item.post -%}
+    <li class="post-list-item">
+      <a href="{{ relatedPost.url }}" class="post-card-link">
+        <div class="post-card-image">
+          {%- if relatedPost.data.image -%}
+            <img src="{{ relatedPost.data.image | replace('-hero.jpg', '-thumb.jpg') }}" alt="{{ relatedPost.data.title }}" loading="lazy">
+          {%- else -%}
+            <span class="material-icons">article</span>
+          {%- endif -%}
+        </div>
+        <div class="post-card-content">
+          <div class="post-card-header">
+            <h2>{{ relatedPost.data.title }}</h2>
+          </div>
+          {% if relatedPost.data.preview %}
+            <p class="post-excerpt">{{ relatedPost.data.preview }}</p>
+          {% elif relatedPost.data.description %}
+            <p class="post-excerpt">{{ relatedPost.data.description }}</p>
+          {% endif %}
+          <div class="post-card-footer">
+            {% if relatedPost.data.tags %}
+              <div class="post-tags">
+                {% for tag in relatedPost.data.tags %}
+                  <span class="tag">{{ tag | formatTag }}</span>
+                {% endfor %}
+              </div>
+            {% endif %}
+            <time datetime="{{ relatedPost.date | dateToFormat('yyyy-MM-dd') }}" class="post-date">{{ relatedPost.date | readableDate }}</time>
+          </div>
+        </div>
+      </a>
+    </li>
+    {%- endfor -%}
+  </ul>
+</section>
+{%- endif -%}
+
+<nav class="post-nav">
+  <a href="/articles/" class="back-link">
+    <span class="material-icons">arrow_back</span>
+    Back to all insights
+  </a>
+</nav>

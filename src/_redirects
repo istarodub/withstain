@@ -1,0 +1,9 @@
+# Topic/Tag Redirects
+# When renaming a topic, add a redirect here to preserve SEO and user bookmarks
+# Format: /old-path /new-path [status-code]
+# Example: /topics/old-tag-name/ /topics/new-tag-name/ 301
+
+# Blog to Articles redirect
+/blog/* /articles/:splat 301
+
+# Add your topic redirects below:

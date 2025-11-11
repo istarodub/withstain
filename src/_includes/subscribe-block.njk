@@ -1,0 +1,99 @@
+{# Reusable subscribe block component #}
+{# Usage: {% include "subscribe-block.njk" %} #}
+
+<div class="subscribe-block">
+  <div id="subscribe-block-message-{{ componentId | default('home') }}" class="subscribe-message" style="display: none;"></div>
+
+  <div class="subscribe-block-content">
+    <span class="material-icons subscribe-icon">mail</span>
+
+    <div class="subscribe-block-text">
+      <h3>Join our Newsletter</h3>
+      <p>Get evidence-based longevity insights delivered to your inbox. No hype, no spam – just practical guidance that works.</p>
+    </div>
+
+    <form class="subscribe-block-form" id="subscribe-block-form-{{ componentId | default('home') }}" method="post">
+      <input
+        type="email"
+        name="email"
+        id="subscribe-block-email-{{ componentId | default('home') }}"
+        placeholder="Enter your email"
+        required
+        aria-label="Email address"
+        class="subscribe-block-input"
+      >
+      <button type="submit" class="subscribe-block-btn" id="subscribe-block-btn-{{ componentId | default('home') }}">
+        Subscribe
+      </button>
+    </form>
+  </div>
+</div>
+
+<script>
+(function() {
+  const componentId = '{{ componentId | default("home") }}';
+  const form = document.getElementById('subscribe-block-form-' + componentId);
+  const emailInput = document.getElementById('subscribe-block-email-' + componentId);
+  const submitBtn = document.getElementById('subscribe-block-btn-' + componentId);
+  const messageDiv = document.getElementById('subscribe-block-message-' + componentId);
+
+  if (!form) return;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const email = emailInput.value.trim();
+
+    // Disable form during submission
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Subscribing...';
+    messageDiv.style.display = 'none';
+
+    try {
+      const response = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        // Success
+        messageDiv.style.display = 'block';
+        messageDiv.className = 'subscribe-message subscribe-message-success';
+        messageDiv.innerHTML = `<strong>Success!</strong> ${data.message}`;
+
+        // Clear form
+        emailInput.value = '';
+
+        // Mark as subscribed in tracking
+        if (window.WithstainCTATracking) {
+          window.WithstainCTATracking.markNewsletterSubscribed();
+        }
+
+        // Hide form after success
+        setTimeout(() => {
+          form.style.display = 'none';
+        }, 2000);
+      } else {
+        // Error
+        messageDiv.style.display = 'block';
+        messageDiv.className = 'subscribe-message subscribe-message-error';
+        messageDiv.innerHTML = `<strong>Error:</strong> ${data.error || 'Something went wrong. Please try again.'}`;
+      }
+    } catch (error) {
+      // Network error
+      messageDiv.style.display = 'block';
+      messageDiv.className = 'subscribe-message subscribe-message-error';
+      messageDiv.innerHTML = '<strong>Error:</strong> Network error. Please check your connection and try again.';
+    } finally {
+      // Re-enable form
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Subscribe';
+    }
+  });
+})();
+</script>

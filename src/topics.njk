@@ -1,0 +1,90 @@
+---
+pagination:
+  data: topicsArray
+  size: 1
+  alias: topicData
+  addAllPagesToCollections: true
+permalink: /topics/{{ topicData[0] }}/
+layout: base.njk
+eleventyComputed:
+  tag: "{{ topicData[0] }}"
+  title: "{{ topicData[1].display }}"
+  description: "{{ topicData[1].description }}"
+---
+
+<div class="topic-page">
+  <section class="page-intro fade-in">
+    <h1>{{ title }}</h1>
+    <p class="lead">{{ description }}</p>
+  </section>
+
+  <section class="topic-posts-section fade-in">
+    {%- set taggedPosts = collections[tag] | reverse -%}
+
+    {% if taggedPosts.length > 0 %}
+    <ul class="post-list">
+      {%- for post in taggedPosts -%}
+      <li class="post-list-item">
+        <a href="{{ post.url }}" class="post-card-link">
+          <div class="post-card-image">
+            {%- if post.data.image -%}
+              <img src="{{ post.data.image | replace('-hero.jpg', '-thumb.jpg') }}" alt="{{ post.data.title }}" loading="lazy">
+            {%- else -%}
+              <span class="material-icons">article</span>
+            {%- endif -%}
+          </div>
+          <div class="post-card-content">
+            <div class="post-card-header">
+              <h2>{{ post.data.title }}</h2>
+            </div>
+            {% if post.data.preview %}
+              <p class="post-excerpt">{{ post.data.preview }}</p>
+            {% elif post.data.description %}
+              <p class="post-excerpt">{{ post.data.description }}</p>
+            {% endif %}
+            <div class="post-card-footer">
+              {% if post.data.tags %}
+                <div class="post-tags">
+                  {% for postTag in post.data.tags %}
+                    <span class="tag">{{ postTag | formatTag }}</span>
+                  {% endfor %}
+                </div>
+              {% endif %}
+              <time datetime="{{ post.date | dateToFormat('yyyy-MM-dd') }}" class="post-date">{{ post.date | readableDate }}</time>
+            </div>
+          </div>
+        </a>
+      </li>
+      {%- endfor -%}
+    </ul>
+    {% else %}
+    <div class="no-posts">
+      <div class="no-posts-icon">
+        <span class="material-icons">library_books</span>
+      </div>
+      <h3>No articles on this topic yet</h3>
+      <p>We're constantly publishing new content. In the meantime, explore our other topics:</p>
+
+      <div class="related-topics">
+        {%- for topic in topicsMeta | dictsort | slice(0, 6) -%}
+          {%- set topicPosts = collections[topic[0]] -%}
+          {%- if topicPosts and topicPosts.length > 0 -%}
+            <a href="/topics/{{ topic[0] }}/" class="related-topic-card">
+              <h4>{{ topic[1].display }}</h4>
+              <p>{{ topic[1].description }}</p>
+              <span class="post-count">{{ topicPosts.length }} article{{ 's' if topicPosts.length != 1 }}</span>
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+    {% endif %}
+  </section>
+
+  <section class="topic-back-link fade-in">
+    <a href="/articles/" class="back-link">
+      <span class="material-icons">arrow_back</span>
+      Back to all insights
+    </a>
+  </section>
+</div>

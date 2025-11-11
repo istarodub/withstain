@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Withstain OG Image</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #18181b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 0;
+      margin: 0;
+    }
+
+    .og-container {
+      width: 1200px;
+      height: 630px;
+      background: linear-gradient(135deg, #18181b 0%, #27272a 100%);
+      background-image: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(163, 230, 53, 0.15), transparent);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 80px;
+    }
+
+    /* Animated gradient background accent */
+    .og-container::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(163, 230, 53, 0.1) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .og-container::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(163, 230, 53, 0.08) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      max-width: 1000px;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .logo {
+      width: 80px;
+      height: auto;
+      color: #a3e635;
+    }
+
+    .brand-name {
+      font-size: 96px;
+      font-weight: 800;
+      color: #a3e635;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      line-height: 1;
+    }
+
+    .tagline {
+      font-size: 32px;
+      font-weight: 400;
+      color: #d4d4d8;
+      line-height: 1.5;
+      margin-top: 30px;
+      padding: 0 40px;
+    }
+
+    .accent-line {
+      width: 200px;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, #a3e635, transparent);
+      margin: 40px auto 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="og-container">
+    <div class="content">
+      <div class="logo-container">
+        <svg class="logo" viewBox="79.888 107.974 43.035 49.000" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="m 122.04986,122.55394 c 1.5676,7.94646 1.3129,15.22377 -3.16983,22.25291 -4.15285,5.87697 -10.77318,10.40034 -17.90067,11.96759 -1.309368,0.17855 -1.953468,0.23841 -3.271168,0.17533 -0.35494,-9.82002 3.022788,-18.60503 9.729638,-25.83175 3.46398,-3.64921 9.22712,-8.56408 14.61203,-8.56408 z" />
+          <path d="m 81.304032,123.08311 c 9.08019,0.76704 17.291045,6.88559 19.973108,10.8462 -2.784057,3.39101 -4.990176,8.86996 -5.801005,12.83536 -0.810829,3.9654 -0.833008,6.14845 -0.901848,9.23414 -2.35964,-1.34178 -1.904755,-1.37458 -3.136705,-2.21318 -9.08754,-6.92285 -14.20524,-20.3823 -10.13355,-30.70252 z" />
+          <circle cx="102.00698" cy="116.86861" r="8.8945131" />
+        </svg>
+        <h1 class="brand-name">Withstain</h1>
+      </div>
+      <p class="tagline">Practical, resilient longevity through modern science</p>
+      <div class="accent-line"></div>
+    </div>
+  </div>
+</body>
+</html>

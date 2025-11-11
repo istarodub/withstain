@@ -1,0 +1,134 @@
+{
+  "aging-research": {
+    "display": "Aging Research",
+    "description": "Latest findings in aging and longevity science"
+  },
+  "anxiety": {
+    "display": "Anxiety",
+    "description": "Managing and reducing anxiety naturally"
+  },
+  "biological-age": {
+    "display": "Biological Age",
+    "description": "Understanding and optimizing your biological age"
+  },
+  "bone-health": {
+    "display": "Bone Health",
+    "description": "Building and maintaining strong bones"
+  },
+  "cellular-aging": {
+    "display": "Cellular Aging",
+    "description": "Cellular health, senescence, and rejuvenation"
+  },
+  "deep-breathing": {
+    "display": "Deep Breathing",
+    "description": "Breathing techniques for stress and anxiety relief"
+  },
+  "early-detection": {
+    "display": "Early Detection",
+    "description": "Articles and insights on early detection"
+  },
+  "early-disease-detection": {
+    "display": "Early Disease Detection",
+    "description": "Articles and insights on early disease detection"
+  },
+  "exercise": {
+    "display": "Exercise",
+    "description": "Movement, training, and physical optimization"
+  },
+  "functional-longevity": {
+    "display": "Functional Longevity",
+    "description": "Articles and insights on functional longevity"
+  },
+  "health-management": {
+    "display": "Health Management",
+    "description": "Articles and insights on health management"
+  },
+  "health-optimization": {
+    "display": "Health Optimization",
+    "description": "Comprehensive approaches to optimizing health and performance"
+  },
+  "health-screening": {
+    "display": "Health Screening",
+    "description": "Articles and insights on health screening"
+  },
+  "healthspan": {
+    "display": "Healthspan",
+    "description": "Articles and insights on healthspan"
+  },
+  "longevity": {
+    "display": "Longevity",
+    "description": "Science-backed strategies for extending healthspan and lifespan"
+  },
+  "mental-wellness": {
+    "display": "Mental Wellness",
+    "description": "Cognitive health and psychological wellbeing"
+  },
+  "metabolic-health": {
+    "display": "Metabolic Health",
+    "description": "Articles and insights on metabolic health"
+  },
+  "mindfulness": {
+    "display": "Mindfulness",
+    "description": "Mindfulness practices for mental clarity and wellbeing"
+  },
+  "nutrition-science": {
+    "display": "Nutrition Science",
+    "description": "Evidence-based insights on diet and metabolic health"
+  },
+  "osteoporosis": {
+    "display": "Osteoporosis",
+    "description": "Prevention and management of bone density loss"
+  },
+  "preventive-care": {
+    "display": "Preventive Care",
+    "description": "Articles and insights on preventive care"
+  },
+  "preventive-health": {
+    "display": "Preventive Health",
+    "description": "Articles and insights on preventive health"
+  },
+  "preventive-health-screening": {
+    "display": "Preventive Health Screening",
+    "description": "Articles and insights on preventive health screening"
+  },
+  "preventive-medicine": {
+    "display": "Preventive Medicine",
+    "description": "Proactive healthcare and disease prevention"
+  },
+  "preventive-screening": {
+    "display": "Preventive Screening",
+    "description": "Articles and insights on preventive screening"
+  },
+  "proactive-care": {
+    "display": "Proactive Care",
+    "description": "Articles and insights on proactive care"
+  },
+  "proactive-health": {
+    "display": "Proactive Health",
+    "description": "Articles and insights on proactive health"
+  },
+  "proactive-health-management": {
+    "display": "Proactive Health Management",
+    "description": "Articles and insights on proactive health management"
+  },
+  "proactive-healthcare": {
+    "display": "Proactive Healthcare",
+    "description": "Articles and insights on proactive healthcare"
+  },
+  "skeletal-muscle": {
+    "display": "Skeletal Muscle",
+    "description": "Articles and insights on skeletal muscle"
+  },
+  "sleep": {
+    "display": "Sleep",
+    "description": "Sleep optimization and circadian health"
+  },
+  "strength-training": {
+    "display": "Strength Training",
+    "description": "Resistance training for longevity and health"
+  },
+  "stress-management": {
+    "display": "Stress Management",
+    "description": "Techniques for managing stress and building resilience"
+  }
+}

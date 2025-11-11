@@ -1,0 +1,13 @@
+node_modules/
+_site/
+.DS_Store
+
+# Environment variables
+.dev.vars
+.env
+.env.local
+.secret
+
+# Wrangler
+.wrangler/
+wrangler.toml.local

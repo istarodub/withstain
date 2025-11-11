@@ -1,0 +1,11 @@
+name = "withstain"
+compatibility_date = "2024-01-01"
+pages_build_output_dir = "_site"
+
+[vars]
+NOTIFICATION_EMAIL = "ivan.starodub@gmail.com"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "withstain-subscribers"
+database_id = "137b6523-af06-4951-89fb-57be6bdd7795"

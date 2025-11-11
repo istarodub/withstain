@@ -1,0 +1,60 @@
+---
+layout: base.njk
+title: Home
+isHomePage: true
+---
+
+<div class="home">
+  <section class="recent-posts" id="blog">
+    <h2>Latest Insights</h2>
+    <p>Recent posts on longevity, health, and self-optimization.</p>
+
+    <ul class="post-list">
+      {%- set recentPosts = collections.posts | reverse -%}
+      {%- for post in recentPosts.slice(0, 3) -%}
+      <li class="post-list-item">
+        <a href="{{ post.url }}" class="post-card-link">
+          <div class="post-card-image">
+            {%- if post.data.image -%}
+              <img src="{{ post.data.image | replace('-hero.jpg', '-thumb.jpg') }}" alt="{{ post.data.title }}" loading="lazy">
+            {%- else -%}
+              <span class="material-icons">article</span>
+            {%- endif -%}
+          </div>
+          <div class="post-card-content">
+            <div class="post-card-header">
+              <h2>{{ post.data.title }}</h2>
+            </div>
+            {% if post.data.preview %}
+              <p class="post-excerpt">{{ post.data.preview }}</p>
+            {% elif post.data.description %}
+              <p class="post-excerpt">{{ post.data.description }}</p>
+            {% endif %}
+            <div class="post-card-footer">
+              {% if post.data.tags %}
+                <div class="post-tags">
+                  {% for tag in post.data.tags %}
+                    <span class="tag">{{ tag | formatTag }}</span>
+                  {% endfor %}
+                </div>
+              {% endif %}
+              <time datetime="{{ post.date | dateToFormat('yyyy-MM-dd') }}" class="post-date">{{ post.date | readableDate }}</time>
+            </div>
+          </div>
+        </a>
+      </li>
+      {%- endfor -%}
+    </ul>
+    <div class="text-center mt-8">
+      <a href="/articles/" class="btn btn-primary">
+        View All Posts
+      </a>
+    </div>
+  </section>
+
+  <!-- Newsletter Subscribe Block -->
+  <section class="fade-in">
+    {% set componentId = "home" %}
+    {% include "subscribe-block.njk" %}
+  </section>
+</div>

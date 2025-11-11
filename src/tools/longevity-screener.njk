@@ -1,0 +1,1444 @@
+---
+layout: base.njk
+title: Longevity Habits Screener
+permalink: /tools/longevity-screener/
+description: Assess your longevity habits across 5 key health pillars and get personalized recommendations.
+---
+
+<div class="screener-page">
+  <section class="page-intro fade-in">
+    <h1>Longevity Habits Screener</h1>
+    <p class="lead">Assess your daily habits across 5 key health pillars. This 2-minute quiz will identify your strengths and areas for improvement.</p>
+  </section>
+
+  <div id="quiz-container" class="quiz-container fade-in">
+    <div class="progress-bar">
+      <div id="progress-fill" class="progress-fill"></div>
+    </div>
+    <div class="progress-text">
+      Step <span id="current-step">1</span> of <span id="total-steps">5</span>
+    </div>
+
+    <form id="screener-form">
+      <!-- Step 1: Nutrition & Diet (20 points) -->
+      <div class="pillar-section step" data-step="1" data-pillar="nutrition">
+        <h2 class="pillar-title">
+          <span class="material-icons">restaurant</span>
+          Nutrition & Diet
+        </h2>
+
+        <div class="question-block">
+          <h3 class="question-text">How often do you eat whole, unprocessed foods?</h3>
+          <div class="answer-options">
+            <label class="answer-option">
+              <input type="radio" name="q1" value="5">
+              <span>Daily – most of my meals are whole foods</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q1" value="3">
+              <span>Often – about half my meals</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q1" value="1">
+              <span>Sometimes – I rely on processed foods frequently</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q1" value="0">
+              <span>Rarely – most of my diet is processed</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <h3 class="question-text">How many servings of vegetables do you eat per day?</h3>
+          <div class="answer-options">
+            <label class="answer-option">
+              <input type="radio" name="q2" value="5">
+              <span>5+ servings</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q2" value="3">
+              <span>3-4 servings</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q2" value="1">
+              <span>1-2 servings</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q2" value="0">
+              <span>Less than 1 serving</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <h3 class="question-text">Do you practice any form of calorie restriction or intermittent fasting?</h3>
+          <div class="answer-options">
+            <label class="answer-option">
+              <input type="radio" name="q3" value="5">
+              <span>Yes, regularly (most days)</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q3" value="3">
+              <span>Sometimes (a few times per week)</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q3" value="1">
+              <span>Rarely</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q3" value="0">
+              <span>Never</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <h3 class="question-text">How mindful are you about your sugar intake?</h3>
+          <div class="answer-options">
+            <label class="answer-option">
+              <input type="radio" name="q4" value="5">
+              <span>Very mindful – I actively limit sugar</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q4" value="3">
+              <span>Somewhat mindful – I watch my intake occasionally</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q4" value="1">
+              <span>Not very mindful – I do not track it</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q4" value="0">
+              <span>Not at all – sugar is a regular part of my diet</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: Exercise & Movement (20 points) -->
+      <div class="pillar-section step" data-step="2" data-pillar="exercise" style="display: none;">
+        <h2 class="pillar-title">
+          <span class="material-icons">fitness_center</span>
+          Exercise & Movement
+        </h2>
+
+        <div class="question-block">
+          <h3 class="question-text">How many days per week do you engage in moderate to vigorous exercise?</h3>
+          <div class="answer-options">
+            <label class="answer-option">
+              <input type="radio" name="q5" value="5">
+              <span>5+ days</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q5" value="3">
+              <span>3-4 days</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q5" value="1">
+              <span>1-2 days</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q5" value="0">
+              <span>Rarely or never</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <h3 class="question-text">Do you incorporate strength training into your routine?</h3>
+          <div class="answer-options">
+            <label class="answer-option">
+              <input type="radio" name="q6" value="5">
+              <span>Yes, 2+ times per week</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q6" value="3">
+              <span>Once a week</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q6" value="1">
+              <span>Occasionally</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q6" value="0">
+              <span>Never</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <h3 class="question-text">How often do you move throughout the day (walking, stretching, etc.)?</h3>
+          <div class="answer-options">
+            <label class="answer-option">
+              <input type="radio" name="q7" value="5">
+              <span>Very frequently – I avoid sitting for long periods</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q7" value="3">
+              <span>Moderately – I take breaks every hour or so</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q7" value="1">
+              <span>Occasionally – I move a few times per day</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q7" value="0">
+              <span>Rarely – I am sedentary most of the day</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <h3 class="question-text">Do you engage in activities that challenge your balance or flexibility?</h3>
+          <div class="answer-options">
+            <label class="answer-option">
+              <input type="radio" name="q8" value="5">
+              <span>Yes, regularly (yoga, tai chi, etc.)</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q8" value="3">
+              <span>Sometimes</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q8" value="1">
+              <span>Rarely</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q8" value="0">
+              <span>Never</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3: Sleep & Recovery (20 points) -->
+      <div class="pillar-section step" data-step="3" data-pillar="sleep" style="display: none;">
+        <h2 class="pillar-title">
+          <span class="material-icons">bedtime</span>
+          Sleep & Recovery
+        </h2>
+
+        <div class="question-block">
+          <h3 class="question-text">How many hours of sleep do you get per night on average?</h3>
+          <div class="answer-options">
+            <label class="answer-option">
+              <input type="radio" name="q9" value="5">
+              <span>7-9 hours</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q9" value="3">
+              <span>6-7 hours</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q9" value="1">
+              <span>5-6 hours</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q9" value="0">
+              <span>Less than 5 hours</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <h3 class="question-text">How would you rate your sleep quality?</h3>
+          <div class="answer-options">
+            <label class="answer-option">
+              <input type="radio" name="q10" value="5">
+              <span>Excellent – I wake refreshed and energized</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q10" value="3">
+              <span>Good – Generally restful</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q10" value="1">
+              <span>Fair – Often disrupted or restless</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q10" value="0">
+              <span>Poor – I struggle to sleep or wake tired</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <h3 class="question-text">Do you have a consistent sleep schedule?</h3>
+          <div class="answer-options">
+            <label class="answer-option">
+              <input type="radio" name="q11" value="5">
+              <span>Yes, I go to bed and wake at the same time daily</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q11" value="3">
+              <span>Mostly consistent on weekdays</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q11" value="1">
+              <span>Somewhat irregular</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q11" value="0">
+              <span>Very irregular – my sleep times vary widely</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <h3 class="question-text">Do you practice good sleep hygiene (dark room, cool temperature, no screens before bed)?</h3>
+          <div class="answer-options">
+            <label class="answer-option">
+              <input type="radio" name="q11b" value="5">
+              <span>Yes, consistently</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q11b" value="3">
+              <span>Most of the time</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q11b" value="1">
+              <span>Sometimes</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q11b" value="0">
+              <span>Rarely or never</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 4: Emotional Health & Mindset (20 points) -->
+      <div class="pillar-section step" data-step="4" data-pillar="emotional" style="display: none;">
+        <h2 class="pillar-title">
+          <span class="material-icons">psychology</span>
+          Emotional Health & Mindset
+        </h2>
+
+        <div class="question-block">
+          <h3 class="question-text">How often do you practice stress management techniques (meditation, deep breathing, etc.)?</h3>
+          <div class="answer-options">
+            <label class="answer-option">
+              <input type="radio" name="q12" value="5">
+              <span>Daily</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q12" value="3">
+              <span>Several times a week</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q12" value="1">
+              <span>Occasionally</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q12" value="0">
+              <span>Rarely or never</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <h3 class="question-text">How would you describe your overall stress levels?</h3>
+          <div class="answer-options">
+            <label class="answer-option">
+              <input type="radio" name="q13" value="5">
+              <span>Low – I feel calm and in control most of the time</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q13" value="3">
+              <span>Moderate – Manageable stress</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q13" value="1">
+              <span>High – Frequently stressed or overwhelmed</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q13" value="0">
+              <span>Very high – Chronic stress affects my daily life</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <h3 class="question-text">Do you have a sense of purpose or meaning in your daily life?</h3>
+          <div class="answer-options">
+            <label class="answer-option">
+              <input type="radio" name="q14" value="5">
+              <span>Yes, strongly</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q14" value="3">
+              <span>Somewhat</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q14" value="1">
+              <span>Occasionally</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q14" value="0">
+              <span>Not really</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <h3 class="question-text">How often do you engage in activities that bring you joy or relaxation?</h3>
+          <div class="answer-options">
+            <label class="answer-option">
+              <input type="radio" name="q15" value="5">
+              <span>Daily</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q15" value="3">
+              <span>Several times a week</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q15" value="1">
+              <span>Occasionally</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q15" value="0">
+              <span>Rarely or never</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 5: Social & Community (20 points) -->
+      <div class="pillar-section step" data-step="5" data-pillar="social" style="display: none;">
+        <h2 class="pillar-title">
+          <span class="material-icons">groups</span>
+          Social & Community
+        </h2>
+
+        <div class="question-block">
+          <h3 class="question-text">How often do you have meaningful social interactions?</h3>
+          <div class="answer-options">
+            <label class="answer-option">
+              <input type="radio" name="q16" value="5">
+              <span>Daily or nearly every day</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q16" value="3">
+              <span>Several times a week</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q16" value="1">
+              <span>Once a week or less</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q16" value="0">
+              <span>Rarely – I feel isolated</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <h3 class="question-text">Do you feel you have a strong support network?</h3>
+          <div class="answer-options">
+            <label class="answer-option">
+              <input type="radio" name="q17" value="5">
+              <span>Yes, I have close friends/family I can rely on</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q17" value="3">
+              <span>Somewhat – I have a few people I can count on</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q17" value="1">
+              <span>Limited – My network is small</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q17" value="0">
+              <span>No – I feel I lack meaningful connections</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <h3 class="question-text">Are you involved in any community activities or groups?</h3>
+          <div class="answer-options">
+            <label class="answer-option">
+              <input type="radio" name="q18" value="5">
+              <span>Yes, regularly</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q18" value="3">
+              <span>Occasionally</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q18" value="1">
+              <span>Rarely</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q18" value="0">
+              <span>Never</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <h3 class="question-text">How satisfied are you with your relationships?</h3>
+          <div class="answer-options">
+            <label class="answer-option">
+              <input type="radio" name="q19" value="5">
+              <span>Very satisfied – My relationships are fulfilling</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q19" value="3">
+              <span>Satisfied – Generally positive</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q19" value="1">
+              <span>Somewhat dissatisfied</span>
+            </label>
+            <label class="answer-option">
+              <input type="radio" name="q19" value="0">
+              <span>Very dissatisfied – I struggle with relationships</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Buttons -->
+      <div class="step-navigation">
+        <button type="button" id="prev-btn" class="nav-btn prev-btn" style="visibility: hidden;">
+          <span class="material-icons">arrow_back</span>
+          Previous
+        </button>
+        <button type="button" id="next-btn" class="nav-btn next-btn">
+          Next
+          <span class="material-icons">arrow_forward</span>
+        </button>
+        <button type="submit" id="submit-btn" class="nav-btn submit-btn" style="display: none;">
+          <span class="material-icons">assessment</span>
+          See My Results
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div id="results-container" class="results-container" style="display: none;">
+    <div class="results-header">
+      <h2>Your Longevity Habits Assessment</h2>
+      <p class="results-intro">Based on your responses, here is how you are doing across the 5 key health pillars:</p>
+    </div>
+
+    <div class="overall-score">
+      <div class="score-circle">
+        <svg viewBox="0 0 200 200" class="score-svg">
+          <circle cx="100" cy="100" r="85" class="score-bg"></circle>
+          <circle cx="100" cy="100" r="85" class="score-fill" id="score-circle"></circle>
+        </svg>
+        <div class="score-text">
+          <span id="overall-score" class="score-number">0</span>
+          <span class="score-label">/ 100</span>
+        </div>
+      </div>
+      <div class="score-message">
+        <h3 id="score-title">Your Overall Score</h3>
+        <p id="score-description"></p>
+      </div>
+    </div>
+
+    <div class="pillar-breakdown">
+      <h3>Breakdown by Pillar</h3>
+      <div class="pillar-bars">
+        <div class="pillar-bar">
+          <div class="pillar-bar-header">
+            <span class="pillar-bar-name">
+              <span class="material-icons">restaurant</span>
+              Nutrition & Diet
+            </span>
+            <span class="pillar-bar-score"><span id="nutrition-score">0</span>/20</span>
+          </div>
+          <div class="pillar-bar-fill-container">
+            <div class="pillar-bar-fill" id="nutrition-bar" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <div class="pillar-bar">
+          <div class="pillar-bar-header">
+            <span class="pillar-bar-name">
+              <span class="material-icons">fitness_center</span>
+              Exercise & Movement
+            </span>
+            <span class="pillar-bar-score"><span id="exercise-score">0</span>/20</span>
+          </div>
+          <div class="pillar-bar-fill-container">
+            <div class="pillar-bar-fill" id="exercise-bar" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <div class="pillar-bar">
+          <div class="pillar-bar-header">
+            <span class="pillar-bar-name">
+              <span class="material-icons">bedtime</span>
+              Sleep & Recovery
+            </span>
+            <span class="pillar-bar-score"><span id="sleep-score">0</span>/20</span>
+          </div>
+          <div class="pillar-bar-fill-container">
+            <div class="pillar-bar-fill" id="sleep-bar" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <div class="pillar-bar">
+          <div class="pillar-bar-header">
+            <span class="pillar-bar-name">
+              <span class="material-icons">psychology</span>
+              Emotional Health & Mindset
+            </span>
+            <span class="pillar-bar-score"><span id="emotional-score">0</span>/20</span>
+          </div>
+          <div class="pillar-bar-fill-container">
+            <div class="pillar-bar-fill" id="emotional-bar" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <div class="pillar-bar">
+          <div class="pillar-bar-header">
+            <span class="pillar-bar-name">
+              <span class="material-icons">groups</span>
+              Social & Community
+            </span>
+            <span class="pillar-bar-score"><span id="social-score">0</span>/20</span>
+          </div>
+          <div class="pillar-bar-fill-container">
+            <div class="pillar-bar-fill" id="social-bar" style="width: 0%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="personalized-feedback">
+      <h3>Your Personalized Recommendations</h3>
+      <div id="feedback-content"></div>
+    </div>
+
+    <div class="next-steps">
+      <h3>Ready to Improve?</h3>
+      <p>Check out our articles on the topics where you scored lowest:</p>
+      <div id="recommended-articles" class="recommended-articles"></div>
+    </div>
+
+    <!-- Newsletter Subscribe Block -->
+    <div class="screener-subscribe">
+      {% set componentId = "screener" %}
+      {% include "subscribe-block.njk" %}
+    </div>
+
+    <button id="retake-btn" class="retake-btn">
+      <span class="material-icons">refresh</span>
+      Retake Assessment
+    </button>
+  </div>
+</div>
+
+<script>
+// Inject topic metadata for JavaScript access
+const topicsMeta = {{ topicsMeta | dump | safe }};
+
+// localStorage utilities with TTL
+function saveScreenerResults(scores) {
+  try {
+    const data = {
+      scores: scores,
+      timestamp: Date.now()
+    };
+    localStorage.setItem('screener_results', JSON.stringify(data));
+  } catch (e) {
+    console.error('Failed to save screener results:', e);
+  }
+}
+
+function getScreenerResults() {
+  try {
+    const data = localStorage.getItem('screener_results');
+    if (!data) return null;
+
+    const parsed = JSON.parse(data);
+    const hourInMs = 60 * 60 * 1000;
+
+    // Check if expired (1 hour TTL)
+    if (Date.now() - parsed.timestamp > hourInMs) {
+      localStorage.removeItem('screener_results');
+      return null;
+    }
+
+    return parsed;
+  } catch (e) {
+    console.error('Failed to retrieve screener results:', e);
+    return null;
+  }
+}
+
+function clearScreenerResults() {
+  localStorage.removeItem('screener_results');
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Step navigation
+  let currentStep = 1;
+  const totalSteps = 5;
+  const form = document.getElementById('screener-form');
+  const quizContainer = document.getElementById('quiz-container');
+  const resultsContainer = document.getElementById('results-container');
+  const progressFill = document.getElementById('progress-fill');
+  const currentStepEl = document.getElementById('current-step');
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
+  const submitBtn = document.getElementById('submit-btn');
+
+  function updateStep() {
+    // Hide all steps
+    document.querySelectorAll('.step').forEach(step => {
+      step.style.display = 'none';
+    });
+
+    // Show current step
+    const activeStep = document.querySelector(`[data-step="${currentStep}"]`);
+    if (activeStep) {
+      activeStep.style.display = 'block';
+    }
+
+    // Update progress
+    currentStepEl.textContent = currentStep;
+    const progress = ((currentStep - 1) / totalSteps) * 100;
+    progressFill.style.width = progress + '%';
+
+    // Update button visibility
+    if (currentStep === 1) {
+      prevBtn.style.visibility = 'hidden';
+    } else {
+      prevBtn.style.visibility = 'visible';
+    }
+
+    if (currentStep === totalSteps) {
+      nextBtn.style.display = 'none';
+      submitBtn.style.display = 'flex';
+    } else {
+      nextBtn.style.display = 'flex';
+      submitBtn.style.display = 'none';
+    }
+
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Next button
+  nextBtn.addEventListener('click', () => {
+    if (currentStep < totalSteps) {
+      currentStep++;
+      updateStep();
+    }
+  });
+
+  // Previous button
+  prevBtn.addEventListener('click', () => {
+    if (currentStep > 1) {
+      currentStep--;
+      updateStep();
+    }
+  });
+
+  // Form submission
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    // Calculate scores
+    const formData = new FormData(form);
+    const scores = {
+      nutrition: 0,
+      exercise: 0,
+      sleep: 0,
+      emotional: 0,
+      social: 0
+    };
+
+    // Nutrition: q1-q4
+    scores.nutrition = ['q1', 'q2', 'q3', 'q4'].reduce((sum, q) =>
+      sum + parseInt(formData.get(q) || 0), 0);
+
+    // Exercise: q5-q8
+    scores.exercise = ['q5', 'q6', 'q7', 'q8'].reduce((sum, q) =>
+      sum + parseInt(formData.get(q) || 0), 0);
+
+    // Sleep: q9-q11b
+    scores.sleep = ['q9', 'q10', 'q11', 'q11b'].reduce((sum, q) =>
+      sum + parseInt(formData.get(q) || 0), 0);
+
+    // Emotional: q12-q15
+    scores.emotional = ['q12', 'q13', 'q14', 'q15'].reduce((sum, q) =>
+      sum + parseInt(formData.get(q) || 0), 0);
+
+    // Social: q16-q19
+    scores.social = ['q16', 'q17', 'q18', 'q19'].reduce((sum, q) =>
+      sum + parseInt(formData.get(q) || 0), 0);
+
+    const totalScore = Object.values(scores).reduce((sum, score) => sum + score, 0);
+
+    // Display results
+    displayResults(totalScore, scores);
+
+    // Hide quiz, show results
+    quizContainer.style.display = 'none';
+    resultsContainer.style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  function displayResults(totalScore, scores) {
+    // Overall score
+    document.getElementById('overall-score').textContent = totalScore;
+
+    // Animate circle
+    const circle = document.getElementById('score-circle');
+    const circumference = 2 * Math.PI * 85;
+    const offset = circumference - (totalScore / 100) * circumference;
+    circle.style.strokeDashoffset = offset;
+
+    // Score title and description
+    let scoreTitle, scoreDescription;
+    if (totalScore >= 80) {
+      scoreTitle = 'Excellent!';
+      scoreDescription = 'You are doing great! Your habits are strongly aligned with longevity principles. Keep up the excellent work and continue fine-tuning.';
+    } else if (totalScore >= 60) {
+      scoreTitle = 'Good Progress';
+      scoreDescription = 'You have a solid foundation. There are some areas where small improvements could make a big difference in your healthspan.';
+    } else if (totalScore >= 40) {
+      scoreTitle = 'Room for Growth';
+      scoreDescription = 'You are on the right track, but there is significant opportunity to optimize your daily habits for better long-term health.';
+    } else {
+      scoreTitle = 'Let\'s Get Started';
+      scoreDescription = 'This is your starting point. Small, consistent changes in your daily routine can lead to major improvements in your health and longevity.';
+    }
+
+    document.getElementById('score-title').textContent = scoreTitle;
+    document.getElementById('score-description').textContent = scoreDescription;
+
+    // Pillar scores and bars
+    Object.entries(scores).forEach(([pillar, score]) => {
+      document.getElementById(`${pillar}-score`).textContent = score;
+      const bar = document.getElementById(`${pillar}-bar`);
+      // Delay animation slightly for effect
+      setTimeout(() => {
+        bar.style.width = (score / 20 * 100) + '%';
+      }, 100);
+    });
+
+    // Generate personalized feedback
+    generateFeedback(scores);
+  }
+
+  function generateFeedback(scores) {
+    const feedbackContent = document.getElementById('feedback-content');
+    const recommendedArticles = document.getElementById('recommended-articles');
+
+    // Find lowest scoring pillars
+    const sortedPillars = Object.entries(scores)
+      .sort((a, b) => a[1] - b[1])
+      .slice(0, 2);
+
+    const feedbackMap = {
+      nutrition: {
+        title: 'Optimize Your Nutrition',
+        text: 'Focus on building a diet rich in whole foods, vegetables, and mindful eating practices. Small changes like adding one extra serving of vegetables per day or reducing processed foods can have significant impacts.',
+        articleTag: 'nutrition-science'
+      },
+      exercise: {
+        title: 'Increase Movement',
+        text: 'Aim to incorporate more movement throughout your day. Even small increases in activity - like taking short walking breaks or adding one strength training session per week - can improve longevity markers.',
+        articleTag: 'exercise'
+      },
+      sleep: {
+        title: 'Prioritize Sleep Quality',
+        text: 'Sleep is foundational to longevity. Focus on consistency first - try going to bed at the same time each night. Then optimize your environment: cool, dark, and screen-free before bed.',
+        articleTag: 'sleep'
+      },
+      emotional: {
+        title: 'Strengthen Emotional Resilience',
+        text: 'Managing stress and cultivating purpose are crucial for healthspan. Start with just 5 minutes of daily mindfulness practice or identify one activity that brings you joy.',
+        articleTag: 'stress-management'
+      },
+      social: {
+        title: 'Build Social Connections',
+        text: 'Strong social ties are one of the most consistent predictors of longevity. Look for opportunities to deepen existing relationships or join a community group aligned with your interests.',
+        articleTag: 'longevity'
+      }
+    };
+
+    let feedbackHTML = '<div class="feedback-items">';
+    sortedPillars.forEach(([pillar, score]) => {
+      const feedback = feedbackMap[pillar];
+      feedbackHTML += `
+        <div class="feedback-item">
+          <h4>${feedback.title}</h4>
+          <p>${feedback.text}</p>
+        </div>
+      `;
+    });
+    feedbackHTML += '</div>';
+    feedbackContent.innerHTML = feedbackHTML;
+
+    // Recommended articles
+    let articlesHTML = '<ul class="article-links">';
+    sortedPillars.forEach(([pillar, score]) => {
+      const feedback = feedbackMap[pillar];
+      const topicSlug = feedback.articleTag;
+      const topicDescription = topicsMeta[topicSlug]?.description || `Explore ${feedback.title}`;
+
+      articlesHTML += `
+        <li>
+          <a href="/topics/${topicSlug}/" class="article-link">
+            <span class="material-icons">arrow_forward</span>
+            ${topicDescription}
+          </a>
+        </li>
+      `;
+    });
+    articlesHTML += '</ul>';
+    recommendedArticles.innerHTML = articlesHTML;
+
+    // Mark tool as completed
+    if (window.WithstainCTATracking) {
+      window.WithstainCTATracking.markToolCompleted('longevity-screener');
+    }
+
+    // Save results to localStorage (1 hour TTL)
+    saveScreenerResults(scores);
+  }
+
+  // Retake button
+  document.getElementById('retake-btn').addEventListener('click', () => {
+    clearScreenerResults();
+    form.reset();
+    currentStep = 1;
+    updateStep();
+    resultsContainer.style.display = 'none';
+    quizContainer.style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Initialize - check for saved results
+  const savedResults = getScreenerResults();
+  if (savedResults && savedResults.scores) {
+    // Restore results view
+    generateFeedback(savedResults.scores);
+    quizContainer.style.display = 'none';
+    resultsContainer.style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else {
+    // Start fresh
+    updateStep();
+  }
+});
+</script>
+
+<style>
+  .screener-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  .page-intro {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .page-intro h1 {
+    font-size: 2.5rem;
+    color: #a3e635;
+    margin-bottom: 1rem;
+  }
+
+  .page-intro .lead {
+    font-size: 1.25rem;
+    color: #d4d4d8;
+  }
+
+  /* Progress Bar */
+  .progress-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(39, 39, 42, 0.8);
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #a3e635, #84cc16);
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+
+  .progress-text {
+    text-align: center;
+    color: #a1a1aa;
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+  }
+
+  /* Quiz Container */
+  .quiz-container {
+    background: rgba(24, 24, 27, 0.5);
+    border: 1px solid #27272a;
+    border-radius: 1rem;
+    padding: 2rem;
+  }
+
+  /* Pillar Sections */
+  .pillar-section {
+    margin-bottom: 2rem;
+  }
+
+  .pillar-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.75rem;
+    color: #a3e635;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #27272a;
+  }
+
+  .pillar-title .material-icons {
+    font-size: 2rem;
+  }
+
+  /* Question Blocks */
+  .question-block {
+    margin-bottom: 2rem;
+  }
+
+  .question-text {
+    font-size: 1.125rem;
+    color: #fafafa;
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+
+  .answer-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .answer-option {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background: rgba(39, 39, 42, 0.5);
+    border: 2px solid #27272a;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .answer-option:hover {
+    background: rgba(39, 39, 42, 0.8);
+    border-color: #a3e635;
+  }
+
+  .answer-option input[type="radio"] {
+    margin-right: 1rem;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #a3e635;
+  }
+
+  .answer-option span {
+    color: #d4d4d8;
+    font-size: 1rem;
+  }
+
+  .answer-option:has(input:checked) {
+    background: rgba(163, 230, 53, 0.1);
+    border-color: #a3e635;
+  }
+
+  /* Step Navigation */
+  .step-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .nav-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .prev-btn {
+    background: rgba(39, 39, 42, 0.8);
+    color: #d4d4d8;
+    border: 2px solid #27272a;
+  }
+
+  .prev-btn:hover {
+    background: rgba(39, 39, 42, 1);
+    border-color: #a3e635;
+  }
+
+  .next-btn {
+    background: #a3e635;
+    color: #18181b;
+    margin-left: auto;
+  }
+
+  .next-btn:hover {
+    background: #84cc16;
+    transform: translateY(-2px);
+  }
+
+  .submit-btn {
+    background: #a3e635;
+    color: #18181b;
+    margin-left: auto;
+  }
+
+  .submit-btn:hover {
+    background: #84cc16;
+    transform: translateY(-2px);
+  }
+
+  /* Results Container */
+  .results-container {
+    background: rgba(24, 24, 27, 0.5);
+    border: 1px solid #27272a;
+    border-radius: 1rem;
+    padding: 2rem;
+  }
+
+  .results-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .results-header h2 {
+    font-size: 2rem;
+    color: #a3e635;
+    margin-bottom: 1rem;
+  }
+
+  .results-intro {
+    font-size: 1.125rem;
+    color: #d4d4d8;
+  }
+
+  /* Overall Score Circle */
+  .overall-score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: rgba(39, 39, 42, 0.5);
+    border-radius: 1rem;
+  }
+
+  .score-circle {
+    position: relative;
+    width: 200px;
+    height: 200px;
+  }
+
+  .score-svg {
+    transform: rotate(-90deg);
+    width: 100%;
+    height: 100%;
+  }
+
+  .score-bg {
+    fill: none;
+    stroke: #27272a;
+    stroke-width: 12;
+  }
+
+  .score-fill {
+    fill: none;
+    stroke: #a3e635;
+    stroke-width: 12;
+    stroke-linecap: round;
+    stroke-dasharray: 534.07; /* 2 * PI * 85 */
+    stroke-dashoffset: 534.07;
+    transition: stroke-dashoffset 1s ease-in-out;
+  }
+
+  .score-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  .score-number {
+    display: block;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #a3e635;
+    line-height: 1;
+  }
+
+  .score-label {
+    display: block;
+    font-size: 1.25rem;
+    color: #a1a1aa;
+    margin-top: 0.25rem;
+  }
+
+  .score-message {
+    text-align: center;
+  }
+
+  .score-message h3 {
+    font-size: 1.5rem;
+    color: #fafafa;
+    margin-bottom: 0.5rem;
+  }
+
+  .score-message p {
+    font-size: 1.125rem;
+    color: #d4d4d8;
+    line-height: 1.6;
+  }
+
+  /* Pillar Breakdown */
+  .pillar-breakdown {
+    margin-bottom: 3rem;
+  }
+
+  .pillar-breakdown h3 {
+    font-size: 1.75rem;
+    color: #a3e635;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .pillar-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .pillar-bar {
+    background: rgba(39, 39, 42, 0.5);
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+  }
+
+  .pillar-bar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+
+  .pillar-bar-name {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.125rem;
+    color: #fafafa;
+    font-weight: 600;
+  }
+
+  .pillar-bar-name .material-icons {
+    color: #a3e635;
+  }
+
+  .pillar-bar-score {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #a3e635;
+  }
+
+  .pillar-bar-fill-container {
+    width: 100%;
+    height: 12px;
+    background: #27272a;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .pillar-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #a3e635, #84cc16);
+    border-radius: 6px;
+    width: 0%;
+    transition: width 1s ease-in-out;
+  }
+
+  /* Personalized Feedback */
+  .personalized-feedback {
+    margin-bottom: 3rem;
+  }
+
+  .personalized-feedback h3 {
+    font-size: 1.75rem;
+    color: #a3e635;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .feedback-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .feedback-item {
+    background: rgba(39, 39, 42, 0.5);
+    border-left: 4px solid #a3e635;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+  }
+
+  .feedback-item h4 {
+    font-size: 1.25rem;
+    color: #fafafa;
+    margin-bottom: 0.75rem;
+  }
+
+  .feedback-item p {
+    font-size: 1rem;
+    color: #d4d4d8;
+    line-height: 1.6;
+  }
+
+  /* Next Steps */
+  .next-steps {
+    margin-bottom: 2rem;
+  }
+
+  .next-steps h3 {
+    font-size: 1.75rem;
+    color: #a3e635;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .next-steps > p {
+    text-align: center;
+    color: #d4d4d8;
+    margin-bottom: 1.5rem;
+  }
+
+  .recommended-articles {
+    background: rgba(39, 39, 42, 0.5);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+  }
+
+  .article-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .article-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: rgba(39, 39, 42, 0.5);
+    border: 1px solid #27272a;
+    border-radius: 0.5rem;
+    color: #d4d4d8;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .article-link:hover {
+    background: rgba(39, 39, 42, 0.8);
+    border-color: #a3e635;
+    color: #a3e635;
+    transform: translateX(4px);
+  }
+
+  .article-link .material-icons {
+    color: #a3e635;
+  }
+
+  /* Retake Button */
+  .retake-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 1rem;
+    background: rgba(39, 39, 42, 0.8);
+    color: #a3e635;
+    border: 2px solid #a3e635;
+    border-radius: 0.5rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .retake-btn:hover {
+    background: rgba(163, 230, 53, 0.1);
+    transform: translateY(-2px);
+  }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .page-intro h1 {
+      font-size: 2rem;
+    }
+
+    .pillar-title {
+      font-size: 1.5rem;
+    }
+
+    .quiz-container,
+    .results-container {
+      padding: 1.5rem;
+    }
+
+    .score-circle {
+      width: 160px;
+      height: 160px;
+    }
+
+    .score-number {
+      font-size: 2.5rem;
+    }
+
+    .step-navigation {
+      flex-wrap: wrap;
+    }
+
+    .prev-btn {
+      order: 1;
+    }
+
+    .next-btn,
+    .submit-btn {
+      order: 2;
+      flex: 1;
+    }
+  }
+</style>

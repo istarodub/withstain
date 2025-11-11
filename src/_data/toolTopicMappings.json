@@ -1,0 +1,37 @@
+{
+  "tools": {
+    "longevity-screener": {
+      "name": "Longevity Habits Screener",
+      "description": "Assess your habits across 5 key longevity pillars and get personalized recommendations",
+      "url": "/tools/longevity-screener/",
+      "relatedTopics": [
+        "longevity",
+        "nutrition-science",
+        "exercise",
+        "sleep",
+        "stress-management",
+        "health-optimization"
+      ],
+      "ctaText": "Take the Screener"
+    }
+  },
+  "topicToTools": {
+    "longevity": ["longevity-screener"],
+    "nutrition-science": ["longevity-screener"],
+    "exercise": ["longevity-screener"],
+    "sleep": ["longevity-screener"],
+    "stress-management": ["longevity-screener"],
+    "health-optimization": ["longevity-screener"],
+    "mental-wellness": ["longevity-screener"],
+    "preventive-medicine": ["longevity-screener"],
+    "aging-research": ["longevity-screener"],
+    "biological-age": ["longevity-screener"],
+    "cellular-aging": ["longevity-screener"],
+    "bone-health": ["longevity-screener"],
+    "strength-training": ["longevity-screener"],
+    "osteoporosis": [],
+    "mindfulness": ["longevity-screener"],
+    "deep-breathing": ["longevity-screener"],
+    "anxiety": ["longevity-screener"]
+  }
+}
