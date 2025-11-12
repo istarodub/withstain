@@ -12,79 +12,89 @@ eleventyComputed:
   description: "{{ topicData[1].description }}"
 ---
 
-<div class="topic-page">
-  <section class="page-intro fade-in">
+<section class="page-intro">
+  <div class="container">
+    <span class="eyebrow">Topic</span>
     <h1>{{ title }}</h1>
     <p class="lead">{{ description }}</p>
-  </section>
+  </div>
+</section>
 
-  <section class="topic-posts-section fade-in">
+<section>
+  <div class="container">
     {%- set taggedPosts = collections[tag] | reverse -%}
 
     {% if taggedPosts.length > 0 %}
-    <ul class="post-list">
+    <div class="articles-grid">
       {%- for post in taggedPosts -%}
-      <li class="post-list-item">
-        <a href="{{ post.url }}" class="post-card-link">
-          <div class="post-card-image">
-            {%- if post.data.image -%}
-              <img src="{{ post.data.image | replace('-hero.jpg', '-thumb.jpg') }}" alt="{{ post.data.title }}" loading="lazy">
-            {%- else -%}
-              <span class="material-icons">article</span>
-            {%- endif -%}
-          </div>
-          <div class="post-card-content">
-            <div class="post-card-header">
-              <h2>{{ post.data.title }}</h2>
-            </div>
-            {% if post.data.preview %}
-              <p class="post-excerpt">{{ post.data.preview }}</p>
-            {% elif post.data.description %}
-              <p class="post-excerpt">{{ post.data.description }}</p>
+      <a href="{{ post.url }}" class="article-link">
+        <article class="article-card">
+          <div class="article-label">
+            {% if post.data.tags and post.data.tags[0] %}
+              {{ post.data.tags[0] | formatTag }}
+            {% else %}
+              Article
             {% endif %}
-            <div class="post-card-footer">
-              {% if post.data.tags %}
-                <div class="post-tags">
-                  {% for postTag in post.data.tags %}
-                    <span class="tag">{{ postTag | formatTag }}</span>
-                  {% endfor %}
-                </div>
-              {% endif %}
-              <time datetime="{{ post.date | dateToFormat('yyyy-MM-dd') }}" class="post-date">{{ post.date | readableDate }}</time>
-            </div>
           </div>
-        </a>
-      </li>
+          <h2 class="article-title">{{ post.data.title }}</h2>
+          {% if post.data.preview %}
+            <p class="article-excerpt">{{ post.data.preview | truncate(150) }}</p>
+          {% elif post.data.description %}
+            <p class="article-excerpt">{{ post.data.description | truncate(150) }}</p>
+          {% endif %}
+          <div class="article-meta">
+            <time datetime="{{ post.date | dateToFormat('yyyy-MM-dd') }}" class="post-date">
+              {{ post.date | readableDate }}
+            </time>
+          </div>
+        </article>
+      </a>
       {%- endfor -%}
-    </ul>
+    </div>
     {% else %}
-    <div class="no-posts">
-      <div class="no-posts-icon">
-        <span class="material-icons">library_books</span>
-      </div>
-      <h3>No articles on this topic yet</h3>
-      <p>We're constantly publishing new content. In the meantime, explore our other topics:</p>
+    <div class="container-narrow">
+      <div class="no-posts">
+        <h3>No articles on this topic yet</h3>
 
-      <div class="related-topics">
-        {%- for topic in topicsMeta | dictsort | slice(0, 6) -%}
-          {%- set topicPosts = collections[topic[0]] -%}
-          {%- if topicPosts and topicPosts.length > 0 -%}
-            <a href="/topics/{{ topic[0] }}/" class="related-topic-card">
-              <h4>{{ topic[1].display }}</h4>
-              <p>{{ topic[1].description }}</p>
-              <span class="post-count">{{ topicPosts.length }} article{{ 's' if topicPosts.length != 1 }}</span>
-            </a>
+        {%- set topicsWithCounts = [] -%}
+        {%- for topic in topicsArray -%}
+          {%- set topicSlug = topic[0] -%}
+          {%- set topicPosts = collections[topicSlug] -%}
+          {%- if topicPosts and topicPosts.length > 0 and topicSlug != tag -%}
+            {%- set topicsWithCounts = (topicsWithCounts.push({slug: topicSlug, data: topic[1], count: topicPosts.length}), topicsWithCounts) -%}
           {%- endif -%}
         {%- endfor -%}
+
+        {%- set sortedTopics = topicsWithCounts | sort(attribute='count') | reverse -%}
+
+        {% if sortedTopics.length > 0 %}
+          <p class="lead">We're constantly publishing new content. In the meantime, explore our other topics:</p>
+          <div class="related-topics">
+            {% set displayCount = 0 %}
+            {% for topic in sortedTopics %}
+              {% if displayCount < 6 %}
+                <a href="/topics/{{ topic.slug }}/" class="related-topic-card">
+                  <h4>{{ topic.data.display }}</h4>
+                  <p>{{ topic.data.description }}</p>
+                  <span class="post-count">{{ topic.count }} article{{ 's' if topic.count != 1 }}</span>
+                </a>
+                {% set displayCount = displayCount + 1 %}
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% else %}
+          <p class="lead">We're constantly publishing new content. Check back soon for articles on this topic.</p>
+        {% endif %}
       </div>
     </div>
     {% endif %}
-  </section>
+  </div>
+</section>
 
-  <section class="topic-back-link fade-in">
-    <a href="/articles/" class="back-link">
-      <span class="material-icons">arrow_back</span>
-      Back to all insights
+<div class="container-narrow">
+  <nav class="post-nav">
+    <a href="/articles/" class="btn btn-secondary">
+      ← Back to Articles
     </a>
-  </section>
+  </nav>
 </div>

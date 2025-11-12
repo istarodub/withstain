@@ -40,7 +40,6 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-N90BC7ECG6');
   </script>
 
@@ -118,134 +117,67 @@
   </script>
   {% endif %}
 
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Google Fonts - Montserrat -->
+  <!-- Google Fonts - Merriweather and Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
-
-  <!-- Material Icons -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="/css/style.css">
   <script src="/js/cta-tracking.js"></script>
 </head>
-<body class="bg-zinc-900 text-zinc-100 min-h-screen flex flex-col antialiased">
+<body>
   <!-- Navigation -->
-  <header class="sticky top-0 bg-zinc-900/80 backdrop-blur-sm z-50 border-b border-zinc-700">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-20">
-        <a href="/" class="flex items-center gap-3 text-2xl font-bold text-lime-300 transition-opacity hover:opacity-80 uppercase tracking-widest">
-          <svg width="28" height="32" viewBox="79.888 107.974 43.035 49.000" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path d="m 122.04986,122.55394 c 1.5676,7.94646 1.3129,15.22377 -3.16983,22.25291 -4.15285,5.87697 -10.77318,10.40034 -17.90067,11.96759 -1.309368,0.17855 -1.953468,0.23841 -3.271168,0.17533 -0.35494,-9.82002 3.022788,-18.60503 9.729638,-25.83175 3.46398,-3.64921 9.22712,-8.56408 14.61203,-8.56408 z" />
-            <path d="m 81.304032,123.08311 c 9.08019,0.76704 17.291045,6.88559 19.973108,10.8462 -2.784057,3.39101 -4.990176,8.86996 -5.801005,12.83536 -0.810829,3.9654 -0.833008,6.14845 -0.901848,9.23414 -2.35964,-1.34178 -1.904755,-1.37458 -3.136705,-2.21318 -9.08754,-6.92285 -14.20524,-20.3823 -10.13355-30.70252 z" />
-            <circle cx="102.00698" cy="116.86861" r="8.8945131" />
-          </svg>
-          Withstain
-        </a>
+  <header class="site-header">
+    <nav class="site-nav">
+      <a href="/" class="site-logo">
+        <img src="/assets/symbol.svg" alt="Withstain" class="site-logo-symbol">
+        <span>Withstain</span>
+      </a>
 
-        <!-- Desktop Navigation -->
-        <nav class="hidden md:flex items-center space-x-4">
-          <a href="/" class="px-3 py-2 text-sm font-medium transition-all duration-200 rounded-md uppercase tracking-wider text-zinc-300 hover:bg-zinc-800 hover:text-lime-300">Home</a>
-          <a href="/articles/" class="px-3 py-2 text-sm font-medium transition-all duration-200 rounded-md uppercase tracking-wider text-zinc-300 hover:bg-zinc-800 hover:text-lime-300">Insights</a>
-          <a href="/tools/longevity-screener/" class="px-3 py-2 text-sm font-medium transition-all duration-200 rounded-md uppercase tracking-wider text-zinc-300 hover:bg-zinc-800 hover:text-lime-300">Tools</a>
-          <a href="/about/" class="px-3 py-2 text-sm font-medium transition-all duration-200 rounded-md uppercase tracking-wider text-zinc-300 hover:bg-zinc-800 hover:text-lime-300">About</a>
-          <a href="/contact/" class="px-3 py-2 text-sm font-medium transition-all duration-200 rounded-md uppercase tracking-wider text-zinc-300 hover:bg-zinc-800 hover:text-lime-300">Contact</a>
-        </nav>
+      <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
 
-        <!-- Mobile menu button -->
-        <button id="mobile-menu-button" class="md:hidden p-2 text-lime-300 hover:bg-zinc-800 rounded-md transition-colors">
-          <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
-          <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
-        </button>
-      </div>
-
-      <!-- Mobile Navigation -->
-      <nav id="mobile-menu" class="hidden md:hidden absolute top-20 left-0 right-0 bg-zinc-900/95 backdrop-blur-sm border-b border-zinc-700 shadow-lg">
-        <div class="container mx-auto px-4 py-4 flex flex-col space-y-2">
-          <a href="/" class="px-3 py-2 text-sm font-medium transition-all duration-200 rounded-md uppercase tracking-wider text-zinc-300 hover:bg-zinc-800 hover:text-lime-300">Home</a>
-          <a href="/articles/" class="px-3 py-2 text-sm font-medium transition-all duration-200 rounded-md uppercase tracking-wider text-zinc-300 hover:bg-zinc-800 hover:text-lime-300">Insights</a>
-          <a href="/tools/longevity-screener/" class="px-3 py-2 text-sm font-medium transition-all duration-200 rounded-md uppercase tracking-wider text-zinc-300 hover:bg-zinc-800 hover:text-lime-300">Tools</a>
-          <a href="/about/" class="px-3 py-2 text-sm font-medium transition-all duration-200 rounded-md uppercase tracking-wider text-zinc-300 hover:bg-zinc-800 hover:text-lime-300">About</a>
-          <a href="/contact/" class="px-3 py-2 text-sm font-medium transition-all duration-200 rounded-md uppercase tracking-wider text-zinc-300 hover:bg-zinc-800 hover:text-lime-300">Contact</a>
-        </div>
-      </nav>
-    </div>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="/">Home</a></li>
+        <li><a href="/articles/">Articles</a></li>
+        <li><a href="/tools/longevity-screener/">Tools</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/contact/">Contact</a></li>
+      </ul>
+    </nav>
   </header>
 
-  {% if isHomePage %}
-  <!-- Hero Section with Video Background (Home page only) -->
-  <section class="relative h-[60vh] md:h-[70vh] flex items-center justify-center text-center -mx-4 sm:-mx-6 lg:-mx-8">
-    <video autoplay loop muted playsinline class="absolute top-0 left-0 w-full h-full object-cover z-0" poster="/videos/hero-poster.jpg" id="heroVideo">
-      <source src="/videos/hero-background-smooth.mp4" type="video/mp4">
-    </video>
-    <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-zinc-900 via-zinc-900/60 to-transparent z-10"></div>
-    <div class="relative z-20 px-4 fade-in flex flex-col items-center">
-      <h1 class="text-5xl md:text-8xl font-extrabold tracking-tighter mb-4 animated-gradient uppercase">Withstain</h1>
-      <p class="max-w-3xl mx-auto text-lg md:text-xl text-zinc-300 mb-8">
-        Practical, resilient longevity through modern science, discipline, and evidence-based self-optimization.
-      </p>
-    </div>
-
-    <!-- CTA Cards at bottom of hero -->
-    <div class="absolute bottom-0 left-0 right-0 z-20 pb-8 px-4">
-      <div class="hero-cta-cards">
-        <a href="/tools/longevity-screener/" class="hero-cta-card">
-          <span class="material-icons hero-cta-icon">assessment</span>
-          <div class="hero-cta-text">
-            <h3>Assess Your Habits</h3>
-            <p>2-minute screener across 5 key health pillars</p>
-          </div>
-          <span class="material-icons hero-cta-arrow">arrow_forward</span>
-        </a>
-
-        <a href="/articles/" class="hero-cta-card">
-          <span class="material-icons hero-cta-icon">article</span>
-          <div class="hero-cta-text">
-            <h3>Read Latest Articles</h3>
-            <p>Evidence-based insights on longevity</p>
-          </div>
-          <span class="material-icons hero-cta-arrow">arrow_forward</span>
-        </a>
-      </div>
-    </div>
-  </section>
-  {% endif %}
-
-  <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+  <main>
     {{ content | safe }}
   </main>
 
-  <footer class="border-t border-zinc-700">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center text-zinc-500 text-sm">
-      <p>&copy; {{ page.date | getYear }} Withstain. All rights reserved.</p>
-      <p class="mt-1">Practical, resilient longevity through modern science.</p>
-    </div>
+  <footer class="site-footer">
+    <p>&copy; {{ page.date | getYear }} Withstain. All rights reserved.</p>
+    <p>Practical, resilient longevity through modern science.</p>
   </footer>
 
   <script>
-    // Slow down hero video
-    const heroVideo = document.getElementById('heroVideo');
-    if (heroVideo) {
-      heroVideo.playbackRate = 0.5;
-    }
+    // Mobile menu toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const navMenu = document.getElementById('nav-menu');
 
-    // Glow Card Effect
-    document.querySelectorAll('.glow-card').forEach(card => {
-      card.addEventListener('mousemove', e => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        card.style.setProperty('--mouse-x', `${x}px`);
-        card.style.setProperty('--mouse-y', `${y}px`);
+    if (mobileMenuButton && navMenu) {
+      mobileMenuButton.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        mobileMenuButton.classList.toggle('active');
       });
-    });
+
+      // Close mobile menu when clicking a link
+      navMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          navMenu.classList.remove('active');
+          mobileMenuButton.classList.remove('active');
+        });
+      });
+    }
 
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -264,28 +196,24 @@
       });
     });
 
-    // Mobile menu toggle
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const menuIcon = document.getElementById('menu-icon');
-    const closeIcon = document.getElementById('close-icon');
+    // Add border to header on scroll
+    const siteHeader = document.querySelector('.site-header');
+    let lastScrollY = window.scrollY;
 
-    if (mobileMenuButton && mobileMenu) {
-      mobileMenuButton.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-        menuIcon.classList.toggle('hidden');
-        closeIcon.classList.toggle('hidden');
-      });
-
-      // Close mobile menu when clicking a link
-      mobileMenu.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-          mobileMenu.classList.add('hidden');
-          menuIcon.classList.remove('hidden');
-          closeIcon.classList.add('hidden');
-        });
-      });
+    function updateHeaderBorder() {
+      if (window.scrollY > 10) {
+        siteHeader.classList.add('scrolled');
+      } else {
+        siteHeader.classList.remove('scrolled');
+      }
     }
+
+    window.addEventListener('scroll', () => {
+      requestAnimationFrame(updateHeaderBorder);
+    });
+
+    // Check on load
+    updateHeaderBorder();
   </script>
 </body>
 </html>

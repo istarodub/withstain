@@ -5,12 +5,10 @@
   <div id="subscribe-block-message-{{ componentId | default('home') }}" class="subscribe-message" style="display: none;"></div>
 
   <div class="subscribe-block-content">
-    <span class="material-icons subscribe-icon">mail</span>
-
-    <div class="subscribe-block-text">
-      <h3>Join our Newsletter</h3>
-      <p>Get evidence-based longevity insights delivered to your inbox. No hype, no spam – just practical guidance that works.</p>
-    </div>
+    <span class="eyebrow">Newsletter</span>
+    <h3>Get Health Advice That's Actually Relevant.</h3>
+    <p class="lead">Join our free weekly newsletter. Once a week, we send one simple, science-backed tip to help you feel better than you did last week.</p>
+    <p class="subscribe-subtext">No spam. No fads. Just clarity.</p>
 
     <form class="subscribe-block-form" id="subscribe-block-form-{{ componentId | default('home') }}" method="post">
       <input
@@ -23,7 +21,7 @@
         class="subscribe-block-input"
       >
       <button type="submit" class="subscribe-block-btn" id="subscribe-block-btn-{{ componentId | default('home') }}">
-        Subscribe
+        Sign Me Up
       </button>
     </form>
   </div>
@@ -92,7 +90,7 @@
     } finally {
       // Re-enable form
       submitBtn.disabled = false;
-      submitBtn.textContent = 'Subscribe';
+      submitBtn.textContent = 'Sign Me Up';
     }
   });
 })();

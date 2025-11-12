@@ -23,6 +23,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/css");
   eleventyConfig.addPassthroughCopy("src/videos");
   eleventyConfig.addPassthroughCopy("src/js");
+  eleventyConfig.addPassthroughCopy("src/assets");
   eleventyConfig.addPassthroughCopy("src/favicon.ico");
   eleventyConfig.addPassthroughCopy("src/robots.txt");
   eleventyConfig.addPassthroughCopy("src/_redirects");
@@ -115,25 +116,24 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addFilter("generateTOC", (content, pageTitle) => {
     if (!content) return [];
 
-    const headingRegex = /<h([23])[^>]*id="([^"]*)"[^>]*>(.*?)<\/h\1>/gi;
+    const headingRegex = /<h2[^>]*id="([^"]*)"[^>]*>(.*?)<\/h2>/gi;
     const toc = [];
     let match;
     let isFirstHeading = true;
 
     while ((match = headingRegex.exec(content)) !== null) {
-      const level = parseInt(match[1]);
-      const id = match[2];
-      const text = match[3].replace(/<[^>]*>/g, ''); // Strip HTML tags
+      const id = match[1];
+      const text = match[2].replace(/<[^>]*>/g, ''); // Strip HTML tags
 
       // Skip first H2 if it matches the page title
-      if (isFirstHeading && level === 2 && pageTitle && text.trim() === pageTitle.trim()) {
+      if (isFirstHeading && pageTitle && text.trim() === pageTitle.trim()) {
         isFirstHeading = false;
         continue;
       }
       isFirstHeading = false;
 
       toc.push({
-        level: level,
+        level: 2,
         id: id,
         text: text
       });

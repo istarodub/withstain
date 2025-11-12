@@ -1,60 +1,179 @@
 ---
 layout: base.njk
-title: Home
+title: Your Personal Longevity Plan
+description: You're busy. You don't need a thousand biohacks. You just need to know the one thing to focus on right now.
 isHomePage: true
 ---
 
-<div class="home">
-  <section class="recent-posts" id="blog">
-    <h2>Latest Insights</h2>
-    <p>Recent posts on longevity, health, and self-optimization.</p>
-
-    <ul class="post-list">
-      {%- set recentPosts = collections.posts | reverse -%}
-      {%- for post in recentPosts.slice(0, 3) -%}
-      <li class="post-list-item">
-        <a href="{{ post.url }}" class="post-card-link">
-          <div class="post-card-image">
-            {%- if post.data.image -%}
-              <img src="{{ post.data.image | replace('-hero.jpg', '-thumb.jpg') }}" alt="{{ post.data.title }}" loading="lazy">
-            {%- else -%}
-              <span class="material-icons">article</span>
-            {%- endif -%}
-          </div>
-          <div class="post-card-content">
-            <div class="post-card-header">
-              <h2>{{ post.data.title }}</h2>
-            </div>
-            {% if post.data.preview %}
-              <p class="post-excerpt">{{ post.data.preview }}</p>
-            {% elif post.data.description %}
-              <p class="post-excerpt">{{ post.data.description }}</p>
-            {% endif %}
-            <div class="post-card-footer">
-              {% if post.data.tags %}
-                <div class="post-tags">
-                  {% for tag in post.data.tags %}
-                    <span class="tag">{{ tag | formatTag }}</span>
-                  {% endfor %}
-                </div>
-              {% endif %}
-              <time datetime="{{ post.date | dateToFormat('yyyy-MM-dd') }}" class="post-date">{{ post.date | readableDate }}</time>
-            </div>
-          </div>
-        </a>
-      </li>
-      {%- endfor -%}
-    </ul>
-    <div class="text-center mt-8">
-      <a href="/articles/" class="btn btn-primary">
-        View All Posts
-      </a>
+<section class="hero">
+    <div class="container-narrow">
+        <h1>Tired of Guessing? Get a Clear, Personal Plan for Your Longevity.</h1>
+        <h2>You're busy. You're probably in your 40s. You don't need a thousand "biohacks." You just need to know the <em>one</em> thing to focus on right now.</h2>
+        <p class="hero-statement">We'll help you find it.</p>
+        <div class="hero-cta">
+            <a href="/tools/longevity-screener/" class="btn btn-primary">Find My Starting Point (Free 2-Min Screener)</a>
+        </div>
     </div>
-  </section>
+</section>
 
-  <!-- Newsletter Subscribe Block -->
-  <section class="fade-in">
-    {% set componentId = "home" %}
-    {% include "subscribe-block.njk" %}
-  </section>
-</div>
+<section>
+    <div class="container-narrow">
+        <span class="eyebrow">The Problem</span>
+        <h3>The Signal Through the Noise</h3>
+        <p class="lead">You're not struggling to find <em>information</em>. You're struggling to find what's <em>relevant</em>.</p>
+    </div>
+
+    <div class="comparison-section">
+        <div class="container-narrow">
+            <div class="comparison-headers">
+                <h5>The Noise (What You Feel)</h5>
+                <h5>Our Signal (What We Provide)</h5>
+            </div>
+
+            <div class="comparison-row">
+                <p class="comparison-quote">"I'm overwhelmed by conflicting advice."</p>
+                <p class="comparison-answer"><strong>Clarity.</strong> We distill complex science into simple, actionable steps.</p>
+            </div>
+
+            <div class="comparison-row">
+                <p class="comparison-quote">"I'm worried about getting older."</p>
+                <p class="comparison-answer"><strong>Control.</strong> Our tools help you pinpoint your weakest links.</p>
+            </div>
+
+            <div class="comparison-row">
+                <p class="comparison-quote">"This doesn't feel relevant to <em>me</em>."</p>
+                <p class="comparison-answer"><strong>Personalization.</strong> Our screeners create a unique starting point <em>just for you</em>.</p>
+            </div>
+
+            <div class="comparison-row">
+                <p class="comparison-quote">"I don't have time for this."</p>
+                <p class="comparison-answer"><strong>Efficiency.</strong> We find the 3 things that matter, so you can ignore the 300 that don't.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container-narrow">
+        <span class="eyebrow">The Process</span>
+        <h3>Your Path to Clarity in 3 Simple Steps</h3>
+        <p class="lead">We built this process to be simple, insightful, and—most importantly—actionable.</p>
+    </div>
+
+    <div class="container">
+        <div class="steps-grid">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h4>Discover</h4>
+                <p>Take our free 2-minute Longevity Screener. We'll ask simple, non-intrusive questions about your current sleep, diet, stress, and movement.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h4>Understand</h4>
+                <p>Get your personalized report. Instantly see your estimated "Biological Age," identify your #1 "Area for Improvement," and finally understand <em>what</em> to focus on.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h4>Act</h4>
+                <p>Receive your "Top 3 Action Steps." We'll link you to the <em>exact</em> articles and practical guides you need to start, and nothing you don't.</p>
+            </div>
+        </div>
+    </div>
+    <div class="section-cta">
+        <a href="/tools/longevity-screener/" class="btn btn-secondary">Start Your Free Assessment</a>
+    </div>
+</section>
+
+<section>
+    <div class="container-narrow">
+        <span class="eyebrow">The Tools</span>
+        <h3>Your Personal Health Toolkit</h3>
+        <p class="lead">Our library of screeners helps you connect the dots between your habits and your health.</p>
+    </div>
+
+    <div class="container">
+        <div class="tools-grid">
+            <div class="tool">
+                <div class="tool-content">
+                    <span class="tool-label tool-label-accent">Start Here</span>
+                    <h4>The Longevity Screener</h4>
+                    <p><strong>This is the perfect place to start.</strong> In just two minutes, get a holistic view of your health and a clear, prioritized action plan.</p>
+                    <a href="/tools/longevity-screener/" class="link">Take the Screener</a>
+                </div>
+            </div>
+            <div class="tool">
+                <div class="tool-content">
+                    <span class="tool-label">Coming Soon</span>
+                    <h4>The Focus Screener</h4>
+                    <p>Productivity isn't just about time management; it's about brain health. This tool helps you understand your focus patterns.</p>
+                    <a href="/contact/" class="link">Get Notified</a>
+                </div>
+            </div>
+            <div class="tool">
+                <div class="tool-content">
+                    <span class="tool-label">Coming Soon</span>
+                    <h4>The Sleep Screener</h4>
+                    <p>Tired of being tired? Pinpoint what's disrupting your rest and get a plan to finally wake up refreshed.</p>
+                    <a href="/contact/" class="link">Get Notified</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section-cta">
+        <a href="/tools/longevity-screener/" class="btn btn-secondary">View All Tools</a>
+    </div>
+</section>
+
+<section>
+    <div class="container-narrow">
+        <span class="eyebrow">From Our Library</span>
+        <h3>Research & Stories You Can Trust</h3>
+        <p class="lead">We do the deep research and talk to the experts so you don't have to. No fads, just facts.</p>
+    </div>
+
+    <div class="container">
+        <div class="articles-grid">
+            {%- set recentPosts = collections.posts | reverse -%}
+            {%- for post in recentPosts.slice(0, 4) -%}
+            <a href="{{ post.url }}" class="article-link">
+                <div class="article-card">
+                    <div class="article-label">{% if post.data.tags and post.data.tags[0] %}{{ post.data.tags[0] | formatTag }}{% else %}Article{% endif %}</div>
+                    <h4 class="article-title">{{ post.data.title }}</h4>
+                    <p class="article-excerpt">{% if post.data.preview %}{{ post.data.preview | truncate(120) }}{% elif post.data.description %}{{ post.data.description | truncate(120) }}{% endif %}</p>
+                    <span class="link">Read More</span>
+                </div>
+            </a>
+            {%- endfor -%}
+        </div>
+    </div>
+    <div class="section-cta">
+        <a href="/articles/" class="btn btn-secondary">Explore All Articles</a>
+    </div>
+</section>
+
+<section style="border-bottom: none;">
+    <div class="about-section">
+        <div class="container-narrow">
+            <span class="eyebrow" style="color: #999;">About</span>
+            <h3>You Don't Need More Information. You Need Better Filters.</h3>
+            <p class="lead">Most longevity content gives you everything. We give you what matters for your situation. Our tools find your weakest links. Our research cuts through the contradictions. Our approach saves you from analysis paralysis.</p>
+            <p>That's the entire mission.</p>
+            <a href="/about/" class="link">Read Our Full Story</a>
+        </div>
+    </div>
+</section>
+
+<section style="border-bottom: none;">
+    <div class="newsletter-section">
+        <div class="newsletter-content">
+            <span class="eyebrow">Newsletter</span>
+            <h3>Get Health Advice That's Actually Relevant.</h3>
+            <p class="lead">Join our free weekly newsletter. Once a week, we send one simple, science-backed tip to help you feel better than you did last week.</p>
+            <p style="color: var(--color-text-secondary); margin-bottom: 0;">No spam. No fads. Just clarity.</p>
+            <form class="email-form" action="https://withstain.us11.list-manage.com/subscribe/post?u=YOUR_USER_ID&id=YOUR_LIST_ID" method="post" target="_blank">
+                <input type="email" name="EMAIL" class="email-input" placeholder="Enter your email" required>
+                <button type="submit" class="btn btn-primary">Sign Me Up</button>
+            </form>
+        </div>
+    </div>
+</section>

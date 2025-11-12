@@ -5,53 +5,49 @@ permalink: /articles/
 description: Evidence-based insights on longevity, nutrition, exercise, sleep, and mental health. Practical guidance for living longer and living well.
 ---
 
-<div class="blog-page">
-  <section class="page-intro fade-in">
-    <h1>Latest Insights</h1>
-    <p class="lead">Insights and stories exploring longevity, health, and self-optimization.</p>
-  </section>
+<section class="page-intro">
+  <div class="container">
+    <span class="eyebrow">Our Library</span>
+    <h1>Articles</h1>
+    <p class="lead">Evidence-based insights on longevity, nutrition, exercise, sleep, and mental health. Practical guidance for living longer and living well.</p>
+  </div>
+</section>
 
-  <section class="blog-posts-section fade-in">
-    <ul class="post-list">
+<section>
+  <div class="container">
+    {% if collections.posts.length > 0 %}
+    <div class="articles-grid">
       {%- for post in collections.posts | reverse -%}
-      <li class="post-list-item">
-        <a href="{{ post.url }}" class="post-card-link">
-          <div class="post-card-image">
-            {%- if post.data.image -%}
-              <img src="{{ post.data.image | replace('-hero.jpg', '-thumb.jpg') }}" alt="{{ post.data.title }}" loading="lazy">
-            {%- else -%}
-              <span class="material-icons">article</span>
-            {%- endif -%}
-          </div>
-          <div class="post-card-content">
-            <div class="post-card-header">
-              <h2>{{ post.data.title }}</h2>
-            </div>
-            {% if post.data.preview %}
-              <p class="post-excerpt">{{ post.data.preview }}</p>
-            {% elif post.data.description %}
-              <p class="post-excerpt">{{ post.data.description }}</p>
+      <a href="{{ post.url }}" class="article-link">
+        <article class="article-card">
+          <div class="article-label">
+            {% if post.data.tags and post.data.tags[0] %}
+              {{ post.data.tags[0] | formatTag }}
+            {% else %}
+              Article
             {% endif %}
-            <div class="post-card-footer">
-              {% if post.data.tags %}
-                <div class="post-tags">
-                  {% for tag in post.data.tags %}
-                    <span class="tag">{{ tag | formatTag }}</span>
-                  {% endfor %}
-                </div>
-              {% endif %}
-              <time datetime="{{ post.date | dateToFormat('yyyy-MM-dd') }}" class="post-date">{{ post.date | readableDate }}</time>
-            </div>
           </div>
-        </a>
-      </li>
+          <h2 class="article-title">{{ post.data.title }}</h2>
+          {% if post.data.preview %}
+            <p class="article-excerpt">{{ post.data.preview | truncate(150) }}</p>
+          {% elif post.data.description %}
+            <p class="article-excerpt">{{ post.data.description | truncate(150) }}</p>
+          {% endif %}
+          <div class="article-meta">
+            <time datetime="{{ post.date | dateToFormat('yyyy-MM-dd') }}" class="post-date">
+              {{ post.date | readableDate }}
+            </time>
+          </div>
+        </article>
+      </a>
       {%- endfor -%}
-    </ul>
-
-    {% if collections.posts.length === 0 %}
-    <div class="no-posts">
-      <p>More articles coming soon – check back for regular updates on living longer and better.</p>
+    </div>
+    {% else %}
+    <div class="container-narrow">
+      <div class="no-posts">
+        <p class="lead">More articles coming soon – check back for regular updates on living longer and better.</p>
+      </div>
     </div>
     {% endif %}
-  </section>
-</div>
+  </div>
+</section>

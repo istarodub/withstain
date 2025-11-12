@@ -1,0 +1,505 @@
+---
+layout: base.njk
+title: Your Longevity Results
+permalink: /tools/longevity-screener/results/
+description: Your personalized longevity assessment results and action plan.
+---
+
+<section class="page-intro results-header">
+  <div class="container-narrow">
+    <span class="eyebrow">Your Results</span>
+    <h1>Your Longevity Assessment</h1>
+    <p class="lead" id="results-intro">Based on your responses, here's where you stand and what to focus on first.</p>
+
+    <div class="results-summary">
+      <div class="results-header-score">
+        <div class="header-score-number" id="header-score">--</div>
+        <div class="header-score-label">Overall Score</div>
+      </div>
+      <div class="score-interpretation" id="interpretation-text">--</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container-narrow">
+    <div id="results-content">
+      <!-- Results will be rendered here by JavaScript -->
+    </div>
+  </div>
+</section>
+
+<section style="background-color: #F9F9F9; margin: 0 calc(var(--spacing-unit) * -4); padding: calc(var(--spacing-unit) * 9) calc(var(--spacing-unit) * 4);">
+  <div class="container-narrow">
+    <span class="eyebrow">Next Steps</span>
+    <h3>Your Action Plan</h3>
+    <div id="action-plan">
+      <!-- Action plan will be rendered here -->
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container-narrow">
+    <span class="eyebrow">Learn More</span>
+    <h3>Explore Relevant Topics</h3>
+    <p class="lead">Dive deeper into the areas where you can make the most impact.</p>
+    <div id="recommended-topics" style="margin-top: calc(var(--spacing-unit) * 6);"></div>
+  </div>
+</section>
+
+<section style="background-color: #F9F9F9; margin: 0 calc(var(--spacing-unit) * -4); padding: calc(var(--spacing-unit) * 9) calc(var(--spacing-unit) * 4);">
+  <div class="container-narrow">
+    {% set componentId = 'results' %}
+    {% include "subscribe-block.njk" %}
+  </div>
+</section>
+
+<style>
+  .results-header {
+    padding-bottom: calc(var(--spacing-unit) * 6);
+  }
+
+  .results-header .container-narrow {
+    max-width: 900px;
+  }
+
+  .results-header h1 {
+    margin-bottom: calc(var(--spacing-unit) * 3);
+  }
+
+  .results-header .lead {
+    margin-bottom: calc(var(--spacing-unit) * 6);
+  }
+
+  .results-summary {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: calc(var(--spacing-unit) * 5);
+    align-items: center;
+  }
+
+  .results-header-score {
+    text-align: center;
+    padding: calc(var(--spacing-unit) * 3) 0;
+    min-width: 180px;
+  }
+
+  .header-score-number {
+    font-family: var(--font-serif);
+    font-size: 72px;
+    font-weight: 900;
+    color: var(--color-accent);
+    line-height: 1;
+    margin-bottom: calc(var(--spacing-unit) * 2);
+  }
+
+  .header-score-label {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #999;
+    font-weight: 600;
+  }
+
+  .score-interpretation {
+    font-size: 19px;
+    color: var(--color-text);
+    margin-bottom: 0;
+    padding: calc(var(--spacing-unit) * 4);
+    background: #F9F9F9;
+    border-left: 3px solid var(--color-accent);
+  }
+
+  .pillars-breakdown {
+    display: grid;
+    gap: calc(var(--spacing-unit) * 4);
+    margin-top: calc(var(--spacing-unit) * 6);
+  }
+
+  .pillar-item {
+    display: grid;
+    grid-template-columns: 140px 1fr 60px;
+    gap: calc(var(--spacing-unit) * 3);
+    align-items: center;
+    padding: calc(var(--spacing-unit) * 4);
+    border: 1px solid var(--color-border);
+    background: white;
+  }
+
+  .pillar-name {
+    font-weight: 600;
+    font-size: 17px;
+  }
+
+  .pillar-bar {
+    height: 12px;
+    background: #f0f0f0;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .pillar-bar-fill {
+    height: 100%;
+    background: var(--color-accent);
+    transition: width 1s ease-out;
+  }
+
+  .pillar-score {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--color-accent);
+    text-align: right;
+  }
+
+  .action-list {
+    display: grid;
+    gap: calc(var(--spacing-unit) * 4);
+    margin-top: calc(var(--spacing-unit) * 4);
+  }
+
+  .action-item {
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    gap: calc(var(--spacing-unit) * 3);
+    padding: calc(var(--spacing-unit) * 4);
+    border: 1px solid var(--color-border);
+    background: white;
+  }
+
+  .action-number {
+    font-family: var(--font-serif);
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--color-accent);
+    line-height: 1;
+  }
+
+  .action-content h4 {
+    margin-top: 0;
+    margin-bottom: calc(var(--spacing-unit) * 2);
+    font-size: 19px;
+  }
+
+  .action-content p {
+    margin: 0;
+    font-size: 16px;
+  }
+
+  .topic-cards {
+    display: grid;
+    gap: calc(var(--spacing-unit) * 4);
+  }
+
+  .topic-card {
+    padding: calc(var(--spacing-unit) * 5);
+    border: 1px solid var(--color-border);
+    background: white;
+    text-decoration: none;
+    color: var(--color-text);
+    transition: all 0.2s ease;
+    display: block;
+  }
+
+  .topic-card:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+  }
+
+  .topic-card h4 {
+    margin-top: 0;
+    margin-bottom: calc(var(--spacing-unit) * 2);
+    color: var(--color-accent);
+    font-size: 21px;
+  }
+
+  .topic-card p {
+    margin: 0;
+    font-size: 16px;
+    color: #666;
+  }
+
+  .retake-link {
+    text-align: center;
+    margin-top: calc(var(--spacing-unit) * 6);
+  }
+
+  @media (max-width: 768px) {
+    .results-header {
+      padding-bottom: calc(var(--spacing-unit) * 4);
+    }
+
+    .results-header h1 {
+      font-size: 32px;
+    }
+
+    .results-header .lead {
+      font-size: 17px;
+      margin-bottom: calc(var(--spacing-unit) * 4);
+    }
+
+    .results-summary {
+      grid-template-columns: auto 1fr;
+      gap: calc(var(--spacing-unit) * 3);
+    }
+
+    .results-header-score {
+      padding: calc(var(--spacing-unit) * 2) 0;
+      min-width: 120px;
+    }
+
+    .header-score-number {
+      font-size: 52px;
+    }
+
+    .pillar-item {
+      grid-template-columns: 1fr;
+      gap: calc(var(--spacing-unit) * 2);
+    }
+
+    .pillar-name {
+      font-size: 16px;
+    }
+
+    .pillar-score {
+      text-align: left;
+    }
+
+    .action-item {
+      grid-template-columns: 1fr;
+      gap: calc(var(--spacing-unit) * 2);
+    }
+
+    .action-number {
+      font-size: 28px;
+    }
+
+    .score-interpretation {
+      font-size: 16px;
+      padding: calc(var(--spacing-unit) * 3);
+    }
+  }
+</style>
+
+<script>
+(function() {
+  // Pillar definitions
+  const pillarInfo = {
+    nutrition: {
+      name: 'Nutrition',
+      topic: 'nutrition-science',
+      topicTitle: 'Nutrition Science',
+      topicDescription: 'Evidence-based guidance on diet, macronutrients, and eating patterns for longevity.'
+    },
+    exercise: {
+      name: 'Exercise',
+      topic: 'exercise',
+      topicTitle: 'Exercise',
+      topicDescription: 'Science-backed strategies for building strength, endurance, and metabolic health.'
+    },
+    sleep: {
+      name: 'Sleep',
+      topic: 'sleep',
+      topicTitle: 'Sleep',
+      topicDescription: 'Practical advice for optimizing sleep quality and circadian health.'
+    },
+    emotional: {
+      name: 'Emotional Health',
+      topic: 'mental-wellness',
+      topicTitle: 'Mental Wellness',
+      topicDescription: 'Research-driven insights on stress management, mood, and emotional resilience.'
+    },
+    social: {
+      name: 'Social Connection',
+      topic: 'mental-wellness',
+      topicTitle: 'Mental Wellness',
+      topicDescription: 'Understanding the role of relationships and community in longevity.'
+    }
+  };
+
+  // Load results from localStorage
+  function loadResults() {
+    const stored = localStorage.getItem('longevityScreenerResults');
+    if (!stored) {
+      // Redirect back to screener if no results
+      window.location.href = '/tools/longevity-screener/';
+      return null;
+    }
+
+    try {
+      const data = JSON.parse(stored);
+
+      // Check if results are expired (24 hours)
+      if (data.expiresAt && new Date().getTime() > data.expiresAt) {
+        localStorage.removeItem('longevityScreenerResults');
+        window.location.href = '/tools/longevity-screener/';
+        return null;
+      }
+
+      return data.scores;
+    } catch (e) {
+      console.error('Error loading results:', e);
+      window.location.href = '/tools/longevity-screener/';
+      return null;
+    }
+  }
+
+  // Calculate overall score
+  function calculateOverallScore(scores) {
+    return Object.values(scores).reduce((sum, score) => sum + score, 0);
+  }
+
+  // Get interpretation text
+  function getInterpretation(score) {
+    if (score >= 85) {
+      return 'Excellent. You\'re in the top tier across most longevity pillars.';
+    } else if (score >= 70) {
+      return 'Strong foundation. A few targeted improvements will move the needle.';
+    } else if (score >= 55) {
+      return 'Solid start. You have clear opportunities to optimize your healthspan.';
+    } else if (score >= 40) {
+      return 'Room for growth. Focus on your weakest links for maximum impact.';
+    } else {
+      return 'Significant opportunity. Small changes in key areas will compound quickly.';
+    }
+  }
+
+  // Find lowest scoring pillars
+  function getLowestPillars(scores, count = 2) {
+    return Object.entries(scores)
+      .sort((a, b) => a[1] - b[1])
+      .slice(0, count)
+      .map(([pillar]) => pillar);
+  }
+
+  // Get action recommendations based on lowest pillars
+  function getActionRecommendations(lowestPillars) {
+    const recommendations = {
+      nutrition: {
+        title: 'Optimize Your Nutrition',
+        description: 'Start by tracking your protein intake for one week. Most people underestimate how much they need, especially as they age. Aim for 0.8-1.0g per pound of body weight.'
+      },
+      exercise: {
+        title: 'Build Your Exercise Foundation',
+        description: 'Begin with 2-3 strength training sessions per week. Focus on compound movements that work multiple muscle groups. Progressive overload is key to longevity.'
+      },
+      sleep: {
+        title: 'Fix Your Sleep Quality',
+        description: 'Set a consistent sleep schedule, even on weekends. Go to bed and wake up at the same time daily. This single change often has the biggest ROI on energy and recovery.'
+      },
+      emotional: {
+        title: 'Address Emotional Health',
+        description: 'Identify your primary stressor and create one specific strategy to manage it. Whether it\'s work, relationships, or health anxiety, targeted action beats generic stress management.'
+      },
+      social: {
+        title: 'Strengthen Social Connections',
+        description: 'Schedule one recurring weekly commitment with friends or family. Loneliness is as harmful as smoking 15 cigarettes a day. Consistent connection matters more than frequency.'
+      }
+    };
+
+    return lowestPillars.map(pillar => recommendations[pillar]);
+  }
+
+  // Render results
+  function renderResults(scores) {
+    const overallScore = calculateOverallScore(scores);
+    const interpretation = getInterpretation(overallScore);
+    const lowestPillars = getLowestPillars(scores);
+
+    // Update header score and interpretation
+    const headerScore = document.getElementById('header-score');
+    headerScore.textContent = overallScore;
+
+    const interpretationText = document.getElementById('interpretation-text');
+    interpretationText.textContent = interpretation;
+
+    // Render breakdown
+    const resultsContent = document.getElementById('results-content');
+    resultsContent.innerHTML = `
+      <h3>Breakdown by Pillar</h3>
+      <div class="pillars-breakdown">
+        ${Object.entries(scores).map(([pillar, score]) => `
+          <div class="pillar-item">
+            <div class="pillar-name">${pillarInfo[pillar].name}</div>
+            <div class="pillar-bar">
+              <div class="pillar-bar-fill" data-width="${(score / 20) * 100}"></div>
+            </div>
+            <div class="pillar-score">${score}<span style="font-size: 16px; color: #999;">/20</span></div>
+          </div>
+        `).join('')}
+      </div>
+
+      <div class="retake-link">
+        <a href="/tools/longevity-screener/" class="btn btn-secondary" id="retake-btn">Retake Assessment</a>
+      </div>
+    `;
+
+    // Animate pillar bars
+    setTimeout(() => {
+      document.querySelectorAll('.pillar-bar-fill').forEach(bar => {
+        bar.style.width = bar.dataset.width + '%';
+      });
+    }, 100);
+
+    // Render action plan
+    const actionRecommendations = getActionRecommendations(lowestPillars);
+    const actionPlan = document.getElementById('action-plan');
+    actionPlan.innerHTML = `
+      <p class="lead">Focus on these two areas first. Improving your weakest links will have the biggest impact on your overall longevity.</p>
+      <div class="action-list">
+        ${actionRecommendations.map((action, index) => `
+          <div class="action-item">
+            <div class="action-number">${index + 1}</div>
+            <div class="action-content">
+              <h4>${action.title}</h4>
+              <p>${action.description}</p>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+
+    // Render recommended topics
+    const uniqueTopics = [...new Set(lowestPillars.map(p => pillarInfo[p].topic))];
+    const recommendedTopics = document.getElementById('recommended-topics');
+    recommendedTopics.innerHTML = `
+      <div class="topic-cards">
+        ${uniqueTopics.map(topicSlug => {
+          const pillar = Object.values(pillarInfo).find(p => p.topic === topicSlug);
+          return `
+            <a href="/topics/${topicSlug}/" class="topic-card">
+              <h4>${pillar.topicTitle}</h4>
+              <p>${pillar.topicDescription}</p>
+            </a>
+          `;
+        }).join('')}
+      </div>
+    `;
+  }
+
+  // Initialize
+  const scores = loadResults();
+  if (scores) {
+    renderResults(scores);
+
+    // Mark screener as completed for CTA tracking
+    if (window.WithstainCTATracking) {
+      window.WithstainCTATracking.markToolCompleted('longevity-screener');
+    }
+
+    // Handle retake button
+    setTimeout(() => {
+      const retakeBtn = document.getElementById('retake-btn');
+      if (retakeBtn) {
+        retakeBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          // Clear results to allow retaking
+          localStorage.removeItem('longevityScreenerResults');
+          window.location.href = '/tools/longevity-screener/';
+        });
+      }
+    }, 100);
+  }
+})();
+</script>
