@@ -135,7 +135,7 @@ export async function onRequestPost(context) {
     return new Response(
       JSON.stringify({
         success: true,
-        message: 'Thank you for subscribing! Check your email for confirmation.'
+        message: 'Thank you for subscribing! Look out for our insights in your inbox.'
       }),
       {
         status: 200,

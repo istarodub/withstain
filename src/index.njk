@@ -26,8 +26,12 @@ isHomePage: true
     <div class="comparison-section">
         <div class="container-narrow">
             <div class="comparison-headers">
-                <h5>The Noise (What You Feel)</h5>
-                <h5>Our Signal (What We Provide)</h5>
+                <div class="comparison-header">
+                    <h5>Your Challenge</h5>
+                </div>
+                <div class="comparison-header">
+                    <h5>Our Signal</h5>
+                </div>
             </div>
 
             <div class="comparison-row">
@@ -165,15 +169,7 @@ isHomePage: true
 
 <section style="border-bottom: none;">
     <div class="newsletter-section">
-        <div class="newsletter-content">
-            <span class="eyebrow">Newsletter</span>
-            <h3>Get Health Advice That's Actually Relevant.</h3>
-            <p class="lead">Join our free weekly newsletter. Once a week, we send one simple, science-backed tip to help you feel better than you did last week.</p>
-            <p style="color: var(--color-text-secondary); margin-bottom: 0;">No spam. No fads. Just clarity.</p>
-            <form class="email-form" action="https://withstain.us11.list-manage.com/subscribe/post?u=YOUR_USER_ID&id=YOUR_LIST_ID" method="post" target="_blank">
-                <input type="email" name="EMAIL" class="email-input" placeholder="Enter your email" required>
-                <button type="submit" class="btn btn-primary">Sign Me Up</button>
-            </form>
-        </div>
+        {% set componentId = 'home' %}
+        {% include "subscribe-block.njk" %}
     </div>
 </section>

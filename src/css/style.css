@@ -322,14 +322,27 @@ section:first-of-type {
     margin-bottom: calc(var(--spacing-unit) * 4);
 }
 
+.comparison-header {
+    padding-bottom: calc(var(--spacing-unit) * 1.5);
+    border-bottom: 2px solid var(--color-border-dark);
+}
+
 .comparison-headers h5 {
     font-family: var(--font-sans);
     font-size: 13px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.12em;
-    padding-bottom: calc(var(--spacing-unit) * 1.5);
-    border-bottom: 2px solid var(--color-border-dark);
+    margin: 0 0 calc(var(--spacing-unit) * 1) 0;
+}
+
+.comparison-subtitle {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--color-text-secondary);
+    letter-spacing: 0.05em;
 }
 
 .comparison-row {
