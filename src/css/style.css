@@ -33,6 +33,7 @@ body {
     background-color: var(--color-background);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: clip;
 }
 
 main {
@@ -664,7 +665,7 @@ a.tag:hover {
 }
 
 .post-image-container {
-    width: 100vw;
+    width: 100%;
     position: relative;
     left: 50%;
     right: 50%;
@@ -1069,7 +1070,7 @@ a.tag:hover {
     text-align: center;
 
     /* Break out of post container to full width */
-    width: 100vw;
+    width: 100%;
     position: relative;
     left: 50%;
     right: 50%;
@@ -1158,7 +1159,7 @@ a.tag:hover {
     background-color: #F9F9F9;
 
     /* Break out of post container to full width */
-    width: 100vw;
+    width: 100%;
     position: relative;
     left: 50%;
     right: 50%;
@@ -1462,6 +1463,21 @@ a.tag:hover {
 
     .comparison-row {
         margin-bottom: calc(var(--spacing-unit) * 4);
+    }
+
+    .container,
+    .container-narrow {
+        padding-left: calc(var(--spacing-unit) * 3);
+        padding-right: calc(var(--spacing-unit) * 3);
+    }
+
+    .comparison-section,
+    .about-section,
+    .newsletter-section {
+        margin-left: calc(var(--spacing-unit) * -3);
+        margin-right: calc(var(--spacing-unit) * -3);
+        padding-left: calc(var(--spacing-unit) * 3);
+        padding-right: calc(var(--spacing-unit) * 3);
     }
 
     .email-form {
