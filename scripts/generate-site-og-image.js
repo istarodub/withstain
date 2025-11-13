@@ -204,23 +204,17 @@ async function generateTwitterImage(outputPath) {
 async function main() {
   console.log('\n🚀 Generating site OG images...\n');
 
-  const ogPath = path.join(__dirname, '../og-image.png');
-  const twitterPath = path.join(__dirname, '../twitter-image.png');
   const srcOgPath = path.join(__dirname, '../src/og-image.png');
+  const srcTwitterPath = path.join(__dirname, '../src/twitter-image.png');
 
   try {
-    await generateOGImage(ogPath);
-    await generateTwitterImage(twitterPath);
-
-    // Copy OG image to src directory for 11ty
-    fs.copyFileSync(ogPath, srcOgPath);
-    console.log(`✅ Copied OG image to src/og-image.png`);
+    await generateOGImage(srcOgPath);
+    await generateTwitterImage(srcTwitterPath);
 
     console.log('\n✨ All site OG images generated successfully!\n');
-    console.log('Generated files:');
-    console.log(`  🎨 OG Image (1200x630):     ${ogPath}`);
-    console.log(`  🐦 Twitter Card (800x800):  ${twitterPath}`);
-    console.log(`  📁 Source copy:             ${srcOgPath}\n`);
+    console.log('Generated files (will be copied to _site by 11ty):');
+    console.log(`  🎨 OG Image (1200x630):     ${srcOgPath}`);
+    console.log(`  🐦 Twitter Card (800x800):  ${srcTwitterPath}\n`);
 
   } catch (error) {
     console.error('\n❌ Error generating images:', error.message);

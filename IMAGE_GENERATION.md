@@ -11,9 +11,8 @@ npm run generate-site-og
 ```
 
 This creates:
-- **og-image.png** (1200x630) - Main site OG image
-- **twitter-image.png** (800x800) - Twitter card image
-- **src/og-image.png** - Copy for 11ty build
+- **src/og-image.png** (1200x630) - Main site OG image (copied to _site/og-image.png)
+- **src/twitter-image.png** (800x800) - Twitter card image (copied to _site/twitter-image.png)
 
 Features:
 - Clean white background with subtle accent gradients
