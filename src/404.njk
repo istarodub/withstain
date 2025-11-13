@@ -17,9 +17,6 @@ eleventyExcludeFromCollections: true
         <h2>Where to go from here?</h2>
         <div class="action-cards-grid">
           <a href="/" class="action-card">
-            <div class="action-card-icon">
-              <span class="material-icons">home</span>
-            </div>
             <div class="action-card-content">
               <h3>Home</h3>
               <p>Start from the beginning</p>
@@ -27,33 +24,18 @@ eleventyExcludeFromCollections: true
           </a>
 
           <a href="/articles/" class="action-card">
-            <div class="action-card-icon">
-              <span class="material-icons">article</span>
-            </div>
             <div class="action-card-content">
-              <h3>Blog</h3>
+              <h3>Articles</h3>
               <p>Read our latest insights</p>
             </div>
           </a>
 
           <a href="/tools/longevity-screener/" class="action-card">
-            <div class="action-card-icon">
-              <span class="material-icons">assessment</span>
-            </div>
             <div class="action-card-content">
               <h3>Screener</h3>
               <p>Assess your health habits</p>
             </div>
           </a>
-        </div>
-      </div>
-
-      <div class="error-search">
-        <p class="search-hint">Or try searching for what you need:</p>
-        <div class="quick-links">
-          <a href="/about/" class="quick-link">About</a>
-          <a href="/contact/" class="quick-link">Contact</a>
-          <a href="/articles/" class="quick-link">All Articles</a>
         </div>
       </div>
     </div>
@@ -64,122 +46,99 @@ eleventyExcludeFromCollections: true
 .error-page {
   max-width: 900px;
   margin: 0 auto;
+  padding: calc(var(--spacing-unit) * 8) calc(var(--spacing-unit) * 4);
 }
 
 .error-section {
   text-align: center;
-  padding: var(--spacing-2xl) 0;
 }
 
 .error-content {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xl);
+  gap: calc(var(--spacing-unit) * 6);
 }
 
 .error-code {
   font-size: clamp(6rem, 15vw, 12rem);
-  font-weight: 800;
+  font-weight: 900;
   line-height: 1;
-  background: linear-gradient(135deg, var(--lime-300), var(--lime-500));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: var(--spacing-md);
+  color: var(--color-accent);
+  margin-bottom: calc(var(--spacing-unit) * 2);
+  font-family: var(--font-serif);
 }
 
 .error-page h1 {
   font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 700;
-  margin-bottom: var(--spacing-md);
-  color: var(--zinc-100);
+  font-weight: 900;
+  margin-bottom: calc(var(--spacing-unit) * 2);
+  color: var(--color-text);
+  font-family: var(--font-serif);
 }
 
 .error-message {
   font-size: 1.125rem;
-  color: var(--zinc-300);
+  color: var(--color-text-secondary);
   max-width: 600px;
-  margin: 0 auto var(--spacing-xl);
+  margin: 0 auto;
   line-height: 1.6;
 }
 
 .error-actions {
-  margin: var(--spacing-2xl) 0;
+  margin: calc(var(--spacing-unit) * 8) 0;
 }
 
 .error-actions h2 {
   font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: var(--spacing-lg);
-  color: var(--zinc-200);
+  font-weight: 700;
+  margin-bottom: calc(var(--spacing-unit) * 4);
+  color: var(--color-text);
+  font-family: var(--font-serif);
 }
 
-.error-search {
-  margin-top: var(--spacing-2xl);
-  padding-top: var(--spacing-xl);
-  border-top: 1px solid var(--zinc-700);
-}
-
-.search-hint {
-  font-size: 1rem;
-  color: var(--zinc-400);
-  margin-bottom: var(--spacing-md);
-}
-
-.quick-links {
-  display: flex;
-  gap: var(--spacing-md);
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.quick-link {
-  padding: var(--spacing-sm) var(--spacing-lg);
-  background: var(--zinc-800);
-  color: var(--zinc-200);
-  text-decoration: none;
-  border-radius: var(--border-radius);
-  font-weight: 500;
-  transition: all 0.2s ease;
-  border: 1px solid var(--zinc-700);
-}
-
-.quick-link:hover {
-  background: var(--zinc-700);
-  color: var(--lime-300);
-  border-color: var(--lime-300);
-  transform: translateY(-2px);
-}
-
-/* Reuse existing action-cards-grid from homepage */
 .error-actions .action-cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: var(--spacing-lg);
+  gap: calc(var(--spacing-unit) * 3);
   max-width: 700px;
   margin: 0 auto;
 }
 
 .error-actions .action-card {
-  padding: var(--spacing-lg);
-  min-height: auto;
+  padding: calc(var(--spacing-unit) * 4);
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  text-align: center;
 }
 
-.error-actions .action-card-icon {
-  margin-bottom: var(--spacing-sm);
+.error-actions .action-card:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .error-actions .action-card-content h3 {
   font-size: 1.25rem;
-  margin-bottom: var(--spacing-xs);
+  margin-bottom: calc(var(--spacing-unit) * 1);
+  color: var(--color-text);
+  font-weight: 700;
+  font-family: var(--font-serif);
 }
 
 .error-actions .action-card-content p {
   font-size: 0.9rem;
-  color: var(--zinc-400);
+  color: var(--color-text-secondary);
+  margin: 0;
 }
 
 @media (max-width: 640px) {
+  .error-page {
+    padding: calc(var(--spacing-unit) * 6) calc(var(--spacing-unit) * 3);
+  }
+
   .error-code {
     font-size: 5rem;
   }
