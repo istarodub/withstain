@@ -8,6 +8,7 @@
     "build": "eleventy",
     "clean": "rm -rf _site",
     "generate-images": "node scripts/generate-images.js",
+    "generate-site-og": "node scripts/generate-site-og-image.js",
     "process-images": "node scripts/process-post-images.js"
   },
   "keywords": [

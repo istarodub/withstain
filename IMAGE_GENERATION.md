@@ -1,21 +1,42 @@
-# Blog Post Image Generation Guide
+# Image Generation Guide
 
-This guide explains how to generate branded images for your blog posts using the automated image generation script.
+This guide explains how to generate branded images for your blog posts and site using the automated image generation scripts.
 
-## What It Generates
+## Site OG Images
 
-The script creates three branded images from a single source image:
+Generate the main site OG and Twitter card images:
+
+```bash
+npm run generate-site-og
+```
+
+This creates:
+- **og-image.png** (1200x630) - Main site OG image
+- **twitter-image.png** (800x800) - Twitter card image
+- **src/og-image.png** - Copy for 11ty build
+
+Features:
+- Clean white background with subtle accent gradients
+- Centered logo and brand name
+- Tagline in Inter font
+- Red accent decorative line
+- Professional editorial design
+
+## Blog Post Images
+
+The blog post script creates three branded images from a single source image:
 
 1. **Thumbnail** (350x200px) - For blog listings with subtle gradient overlay
 2. **Hero Image** (1200x630px) - For the blog post page with brand overlay
 3. **OG Image** (1200x630px) - For social media sharing with title overlay
 
 All images feature the Withstain editorial brand design:
-- Clean white overlays with subtle gradients
+- Clean white overlays with subtle gradients matching blog post style
 - Red accent color (#C41E3A)
 - Merriweather serif typography for headings
 - Inter sans-serif for body text
 - Professional editorial aesthetic
+- Text shadow effects for depth
 
 ## Installation
 
