@@ -205,7 +205,7 @@ Artificial intelligence is not just a future concept; it is already being deploy
 These new technologies are exciting. However, they are being deployed into a flawed, inequitable system. Without deliberate intervention, they will amplify our greatest challenges.
 
 1.  **Harms Amplified:** If the medical system struggles to communicate overdiagnosis harms from a single test like PSA, how will it manage the ethical fallout from a flood of false positives and overdiagnosed tumors from an MCED test that screens for 50 cancers at once?
-2.  **Inequity Amplified:** These technologies—PRS, MCED, AI platforms—will be expensive. If only the wealthy can access them, a two-tiered health system will emerge. A "genetic elite" will prevent disease decades in advance, while others rely on older systems. This will dramatically widen existing health disparities.
+2.  **Inequity Amplified:** These technologies – PRS, MCED, AI platforms – will be expensive. If only the wealthy can access them, a two-tiered health system will emerge. A "genetic elite" will prevent disease decades in advance, while others rely on older systems. This will dramatically widen existing health disparities.
 3.  **Bias Amplified:** AI is not objective; it is trained on data. If that data is not diverse, AI will be less accurate for non-White patients. This risks codifying and scaling existing racial biases, worsening health disparities.
 
 ## Concluding Report: The Mandate for Proactive Health
