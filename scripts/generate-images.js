@@ -20,20 +20,23 @@ const { createCanvas, loadImage, registerFont } = require('canvas');
 const path = require('path');
 const fs = require('fs');
 
-// Register Montserrat fonts for canvas rendering - using exact Google Fonts versions
-// Note: Register with actual font weight (bold/normal) not CSS weight numbers
-registerFont(path.join(__dirname, '../assets/fonts/Montserrat-700.ttf'), { family: 'Montserrat', weight: 'bold' });
-registerFont(path.join(__dirname, '../assets/fonts/Montserrat-800.ttf'), { family: 'Montserrat ExtraBold' });
+// Register fonts for canvas rendering - using new editorial design system
+registerFont(path.join(__dirname, '../assets/fonts/Merriweather-Regular.ttf'), { family: 'Merriweather', weight: 'normal' });
+registerFont(path.join(__dirname, '../assets/fonts/Merriweather-Bold.ttf'), { family: 'Merriweather', weight: 'bold' });
+registerFont(path.join(__dirname, '../assets/fonts/Merriweather-Black.ttf'), { family: 'Merriweather', weight: '900' });
+registerFont(path.join(__dirname, '../assets/fonts/Inter-Regular.ttf'), { family: 'Inter', weight: 'normal' });
+registerFont(path.join(__dirname, '../assets/fonts/Inter-Medium.ttf'), { family: 'Inter', weight: '500' });
+registerFont(path.join(__dirname, '../assets/fonts/Inter-SemiBold.ttf'), { family: 'Inter', weight: '600' });
 
-// Design system colors
+// Design system colors - Editorial Design
 const COLORS = {
-  zinc900: '#18181b',
-  zinc800: '#27272a',
-  zinc700: '#3f3f46',
-  zinc300: '#d4d4d8',
-  zinc100: '#fafafa',
-  lime300: '#a3e635',
-  lime200: '#d9f99d',
+  background: '#FFFFFF',
+  text: '#1A1A1A',
+  textSecondary: '#5C5C5C',
+  accent: '#C41E3A',
+  accentDark: '#A01829',
+  border: '#D8D8D8',
+  borderDark: '#2A2A2A',
 };
 
 // Configuration
@@ -66,6 +69,7 @@ async function wrapText(ctx, text, maxWidth) {
 async function generateThumbnail(inputPath, outputPath) {
   console.log('📸 Generating thumbnail...');
 
+  // Clean editorial design - subtle vignette for depth
   await sharp(inputPath)
     .resize(CONFIG.thumbnail.width, CONFIG.thumbnail.height, {
       fit: 'cover',
@@ -75,12 +79,12 @@ async function generateThumbnail(inputPath, outputPath) {
       input: Buffer.from(`
         <svg width="${CONFIG.thumbnail.width}" height="${CONFIG.thumbnail.height}">
           <defs>
-            <linearGradient id="grad" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" style="stop-color:${COLORS.zinc900};stop-opacity:0" />
-              <stop offset="100%" style="stop-color:${COLORS.zinc900};stop-opacity:0.6" />
-            </linearGradient>
+            <radialGradient id="vignette" cx="50%" cy="50%">
+              <stop offset="0%" style="stop-color:#000000;stop-opacity:0" />
+              <stop offset="100%" style="stop-color:#000000;stop-opacity:0.15" />
+            </radialGradient>
           </defs>
-          <rect width="100%" height="100%" fill="url(#grad)"/>
+          <rect width="100%" height="100%" fill="url(#vignette)"/>
         </svg>
       `),
       blend: 'over'
@@ -93,7 +97,7 @@ async function generateThumbnail(inputPath, outputPath) {
 async function generateHeroImage(inputPath, outputPath) {
   console.log('🖼️  Generating hero image...');
 
-  // Create canvas for overlay - same approach as OG image
+  // Create canvas for overlay - editorial clean design
   const canvas = createCanvas(CONFIG.hero.width, CONFIG.hero.height);
   const ctx = canvas.getContext('2d');
 
@@ -120,72 +124,16 @@ async function generateHeroImage(inputPath, outputPath) {
 
   ctx.drawImage(backgroundImage, offsetX, offsetY, drawWidth, drawHeight);
 
-  // Add gradient overlay
+  // Add white gradient overlay to match editorial design (similar to CSS)
   const gradient = ctx.createLinearGradient(0, 0, 0, CONFIG.hero.height);
-  gradient.addColorStop(0, COLORS.zinc900 + '66'); // 0.4 opacity
-  gradient.addColorStop(0.6, COLORS.zinc900 + '99'); // 0.6 opacity
-  gradient.addColorStop(1, COLORS.zinc900 + 'D9'); // 0.85 opacity
+  gradient.addColorStop(0, COLORS.background + '99'); // 0.6 opacity
+  gradient.addColorStop(0.2, COLORS.background + '4D'); // 0.3 opacity
+  gradient.addColorStop(0.4, COLORS.background + '80'); // 0.5 opacity
+  gradient.addColorStop(0.6, COLORS.background + 'B3'); // 0.7 opacity
+  gradient.addColorStop(0.8, COLORS.background + 'F2'); // 0.95 opacity
+  gradient.addColorStop(1, COLORS.background); // 1.0 opacity
   ctx.fillStyle = gradient;
   ctx.fillRect(0, 0, CONFIG.hero.width, CONFIG.hero.height);
-
-  // Add corner glow
-  const radialGrad = ctx.createRadialGradient(150, 150, 0, 150, 150, 250);
-  radialGrad.addColorStop(0, COLORS.lime300 + '1F'); // 0.12 opacity
-  radialGrad.addColorStop(1, 'transparent');
-  ctx.fillStyle = radialGrad;
-  ctx.beginPath();
-  ctx.arc(150, 150, 250, 0, Math.PI * 2);
-  ctx.fill();
-
-  // Logo and brand section - matching OG image approach exactly
-  const topPadding = 60;
-  const leftPadding = 80;
-  const logoScale = 0.65;
-  const brandingCenterY = topPadding + 16;
-
-  // Draw logo using canvas operations
-  ctx.save();
-  ctx.translate(leftPadding, brandingCenterY - 16);
-  ctx.scale(logoScale, logoScale);
-  ctx.fillStyle = COLORS.lime300;
-  ctx.globalAlpha = 0.7;
-
-  // Top-right element
-  ctx.beginPath();
-  ctx.moveTo(42, 14);
-  ctx.bezierCurveTo(43.5, 22, 43, 29, 39, 36);
-  ctx.bezierCurveTo(35, 42, 28, 47, 21, 48);
-  ctx.bezierCurveTo(20, 48, 19, 48, 18, 48);
-  ctx.bezierCurveTo(18, 38, 21, 29, 28, 22);
-  ctx.bezierCurveTo(31, 19, 37, 14, 42, 14);
-  ctx.closePath();
-  ctx.fill();
-
-  // Left element
-  ctx.beginPath();
-  ctx.moveTo(1, 15);
-  ctx.bezierCurveTo(10, 16, 18, 22, 21, 26);
-  ctx.bezierCurveTo(18, 29, 16, 35, 15, 39);
-  ctx.bezierCurveTo(15, 42, 15, 44, 15, 47);
-  ctx.bezierCurveTo(13, 46, 12, 46, 12, 45);
-  ctx.bezierCurveTo(3, 38, -2, 25, 1, 15);
-  ctx.closePath();
-  ctx.fill();
-
-  // Center circle
-  ctx.beginPath();
-  ctx.arc(22, 9, 9, 0, Math.PI * 2);
-  ctx.fill();
-
-  ctx.restore();
-
-  // Add "WITHSTAIN" text - using textBaseline = 'middle' like OG image
-  ctx.fillStyle = COLORS.lime300;
-  ctx.globalAlpha = 0.7;
-  ctx.font = 'bold 24px Montserrat';
-  ctx.textBaseline = 'middle'; // Same as OG image
-  ctx.letterSpacing = '0.1em'; // tracking-widest in Tailwind
-  ctx.fillText('WITHSTAIN', leftPadding + 40, brandingCenterY);
 
   // Convert canvas to buffer and save with sharp
   const buffer = canvas.toBuffer('image/jpeg', { quality: 0.98 });
@@ -232,79 +180,52 @@ async function generateOGImage(inputPath, title, outputPath) {
 
   ctx.drawImage(backgroundImage, offsetX, offsetY, drawWidth, drawHeight);
 
-  // Add stronger gradient overlay for better text readability
+  // Add white overlay matching blog post style
+  // CSS: linear-gradient(to bottom, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.3) 20%,
+  //      rgba(255, 255, 255, 0.5) 40%, rgba(255, 255, 255, 0.7) 60%,
+  //      rgba(255, 255, 255, 0.95) 80%, rgba(255, 255, 255, 1) 100%)
   const gradient = ctx.createLinearGradient(0, 0, 0, CONFIG.og.height);
-  gradient.addColorStop(0, COLORS.zinc900 + 'DD');
-  gradient.addColorStop(1, COLORS.zinc900 + 'F5');
+  gradient.addColorStop(0, COLORS.background + '99');    // 0.6 opacity (60%)
+  gradient.addColorStop(0.2, COLORS.background + '4D');  // 0.3 opacity (30%)
+  gradient.addColorStop(0.4, COLORS.background + '80');  // 0.5 opacity (50%)
+  gradient.addColorStop(0.6, COLORS.background + 'B3');  // 0.7 opacity (70%)
+  gradient.addColorStop(0.8, COLORS.background + 'F2');  // 0.95 opacity (95%)
+  gradient.addColorStop(1, COLORS.background + 'FF');    // 1.0 opacity (100%)
   ctx.fillStyle = gradient;
   ctx.fillRect(0, 0, CONFIG.og.width, CONFIG.og.height);
 
-  // Add subtle lime glow accent in top corner
-  const radialGrad1 = ctx.createRadialGradient(1100, 100, 0, 1100, 100, 300);
-  radialGrad1.addColorStop(0, COLORS.lime300 + '15');
-  radialGrad1.addColorStop(1, 'transparent');
-  ctx.fillStyle = radialGrad1;
-  ctx.fillRect(700, 0, 500, 300);
-
-  // Logo and brand section at top - matching navbar (28x32 logo, 24px text)
+  // Logo and brand section at top
   const topPadding = 60;
   const leftPadding = 80;
-  const logoScale = 0.65; // Navbar uses 28x32, SVG is 43x49, scale = 28/43 ≈ 0.65
-  const brandingCenterY = topPadding + 16; // Vertical center for logo + text alignment
+  const logoHeight = 28; // Target height for logo (matching navbar)
+  const brandingCenterY = topPadding + 16;
 
-  // Draw full SVG logo using canvas operations
+  // Load and draw actual logo from assets
+  const logoImage = await loadImage(path.join(__dirname, '../src/assets/symbol.png'));
+  const logoWidth = (logoImage.width / logoImage.height) * logoHeight;
+
   ctx.save();
-  // Logo scaled to match navbar size (28x32)
-  // Visual center at ~24 * 0.65 = 15.6
-  ctx.translate(leftPadding, brandingCenterY - 16);
-  ctx.scale(logoScale, logoScale);
-  ctx.fillStyle = COLORS.lime300;
-
-  // Draw the three logo elements
-  // These coordinates are simplified from the SVG viewBox (79.888 107.974 43.035 49.000)
-
-  // Top-right element (simplified curve)
-  ctx.beginPath();
-  ctx.moveTo(42, 14);
-  ctx.bezierCurveTo(43.5, 22, 43, 29, 39, 36);
-  ctx.bezierCurveTo(35, 42, 28, 47, 21, 48);
-  ctx.bezierCurveTo(20, 48, 19, 48, 18, 48);
-  ctx.bezierCurveTo(18, 38, 21, 29, 28, 22);
-  ctx.bezierCurveTo(31, 19, 37, 14, 42, 14);
-  ctx.closePath();
-  ctx.fill();
-
-  // Left element (simplified curve)
-  ctx.beginPath();
-  ctx.moveTo(1, 15);
-  ctx.bezierCurveTo(10, 16, 18, 22, 21, 26);
-  ctx.bezierCurveTo(18, 29, 16, 35, 15, 39);
-  ctx.bezierCurveTo(15, 42, 15, 44, 15, 47);
-  ctx.bezierCurveTo(13, 46, 12, 46, 12, 45);
-  ctx.bezierCurveTo(3, 38, -2, 25, 1, 15);
-  ctx.closePath();
-  ctx.fill();
-
-  // Center circle
-  ctx.beginPath();
-  ctx.arc(22, 9, 9, 0, Math.PI * 2);
-  ctx.fill();
-
+  ctx.drawImage(logoImage, leftPadding, brandingCenterY - (logoHeight / 2), logoWidth, logoHeight);
   ctx.restore();
 
-  // Add "WITHSTAIN" text next to logo - matching navbar (24px, Montserrat, uppercase, tracking-widest)
-  ctx.fillStyle = COLORS.lime300;
-  ctx.font = 'bold 24px Montserrat'; // text-2xl = 24px, bold (700), using Montserrat font
-  ctx.textBaseline = 'middle'; // Center-align text vertically
-  ctx.letterSpacing = '0.1em'; // tracking-widest in Tailwind
-  ctx.fillText('WITHSTAIN', leftPadding + 40, brandingCenterY); // Adjusted for smaller logo
+  // Add "Withstain" text - editorial style
+  ctx.fillStyle = COLORS.text;
+  ctx.font = '900 24px Merriweather'; // Using Merriweather Black for brand
+  ctx.textBaseline = 'middle';
+  ctx.fillText('Withstain', leftPadding + logoWidth + 12, brandingCenterY); // 12px gap after logo
 
-  // Reset text baseline for title and other text
+  // Reset text baseline for title
   ctx.textBaseline = 'alphabetic';
 
-  // Add title with better spacing
-  ctx.fillStyle = COLORS.zinc100;
-  ctx.font = '64px "Montserrat ExtraBold"'; // Extrabold (800) like site headings
+  // Add title with editorial typography and shadow effect
+  ctx.fillStyle = COLORS.text;
+  ctx.font = '900 64px Merriweather'; // Merriweather Black for headings
+
+  // Add text shadow matching blog post style (0 2px 8px rgba(0,0,0,0.15), 0 1px 3px rgba(0,0,0,0.2))
+  ctx.shadowColor = 'rgba(0, 0, 0, 0.2)';
+  ctx.shadowOffsetX = 0;
+  ctx.shadowOffsetY = 2;
+  ctx.shadowBlur = 8;
 
   const maxTitleWidth = CONFIG.og.width - (leftPadding * 2);
   const lines = await wrapText(ctx, title, maxTitleWidth);
@@ -315,16 +236,20 @@ async function generateOGImage(inputPath, title, outputPath) {
     ctx.fillText(line, leftPadding, titleStartY + (index * lineHeight));
   });
 
-  // Add decorative accent line below title
+  // Reset shadow for other elements
+  ctx.shadowColor = 'transparent';
+  ctx.shadowBlur = 0;
+
+  // Add decorative accent line below title - red accent
   const accentY = titleStartY + (lines.length * lineHeight) + 40;
-  ctx.fillStyle = COLORS.lime300;
+  ctx.fillStyle = COLORS.accent;
   ctx.fillRect(leftPadding, accentY, 160, 4);
 
   // Add tagline at bottom
   const bottomPadding = 60;
-  ctx.fillStyle = COLORS.zinc300;
-  ctx.font = '22px Montserrat';
-  ctx.fillText('Evidence-based longevity through modern science', leftPadding, CONFIG.og.height - bottomPadding);
+  ctx.fillStyle = COLORS.textSecondary;
+  ctx.font = '22px Inter';
+  ctx.fillText('Practical, resilient longevity through modern science', leftPadding, CONFIG.og.height - bottomPadding);
 
   // Convert canvas to buffer and save with sharp
   const buffer = canvas.toBuffer('image/png');
@@ -371,75 +296,52 @@ async function generateTwitterOGImage(inputPath, title, outputPath) {
 
   ctx.drawImage(backgroundImage, offsetX, offsetY, drawWidth, drawHeight);
 
-  // Add stronger gradient overlay for better text readability
+  // Add white overlay matching blog post style
+  // CSS: linear-gradient(to bottom, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.3) 20%,
+  //      rgba(255, 255, 255, 0.5) 40%, rgba(255, 255, 255, 0.7) 60%,
+  //      rgba(255, 255, 255, 0.95) 80%, rgba(255, 255, 255, 1) 100%)
   const gradient = ctx.createLinearGradient(0, 0, 0, CONFIG.twitter.height);
-  gradient.addColorStop(0, COLORS.zinc900 + 'DD');
-  gradient.addColorStop(1, COLORS.zinc900 + 'F5');
+  gradient.addColorStop(0, COLORS.background + '99');    // 0.6 opacity (60%)
+  gradient.addColorStop(0.2, COLORS.background + '4D');  // 0.3 opacity (30%)
+  gradient.addColorStop(0.4, COLORS.background + '80');  // 0.5 opacity (50%)
+  gradient.addColorStop(0.6, COLORS.background + 'B3');  // 0.7 opacity (70%)
+  gradient.addColorStop(0.8, COLORS.background + 'F2');  // 0.95 opacity (95%)
+  gradient.addColorStop(1, COLORS.background + 'FF');    // 1.0 opacity (100%)
   ctx.fillStyle = gradient;
   ctx.fillRect(0, 0, CONFIG.twitter.width, CONFIG.twitter.height);
-
-  // Add subtle lime glow accent in top corner
-  const radialGrad1 = ctx.createRadialGradient(700, 80, 0, 700, 80, 250);
-  radialGrad1.addColorStop(0, COLORS.lime300 + '15');
-  radialGrad1.addColorStop(1, 'transparent');
-  ctx.fillStyle = radialGrad1;
-  ctx.fillRect(500, 0, 300, 250);
 
   // Logo and brand section at top - scaled for 800x800
   const topPadding = 50;
   const leftPadding = 60;
-  const logoScale = 0.55; // Slightly smaller for square format
+  const logoHeight = 24; // Slightly smaller for square format
   const brandingCenterY = topPadding + 14;
 
-  // Draw full SVG logo using canvas operations
+  // Load and draw actual logo from assets
+  const logoImage = await loadImage(path.join(__dirname, '../src/assets/symbol.png'));
+  const logoWidth = (logoImage.width / logoImage.height) * logoHeight;
+
   ctx.save();
-  ctx.translate(leftPadding, brandingCenterY - 14);
-  ctx.scale(logoScale, logoScale);
-  ctx.fillStyle = COLORS.lime300;
-
-  // Draw the three logo elements
-  // Top-right element (simplified curve)
-  ctx.beginPath();
-  ctx.moveTo(42, 14);
-  ctx.bezierCurveTo(43.5, 22, 43, 29, 39, 36);
-  ctx.bezierCurveTo(35, 42, 28, 47, 21, 48);
-  ctx.bezierCurveTo(20, 48, 19, 48, 18, 48);
-  ctx.bezierCurveTo(18, 38, 21, 29, 28, 22);
-  ctx.bezierCurveTo(31, 19, 37, 14, 42, 14);
-  ctx.closePath();
-  ctx.fill();
-
-  // Left element (simplified curve)
-  ctx.beginPath();
-  ctx.moveTo(1, 15);
-  ctx.bezierCurveTo(10, 16, 18, 22, 21, 26);
-  ctx.bezierCurveTo(18, 29, 16, 35, 15, 39);
-  ctx.bezierCurveTo(15, 42, 15, 44, 15, 47);
-  ctx.bezierCurveTo(13, 46, 12, 46, 12, 45);
-  ctx.bezierCurveTo(3, 38, -2, 25, 1, 15);
-  ctx.closePath();
-  ctx.fill();
-
-  // Center circle
-  ctx.beginPath();
-  ctx.arc(22, 9, 9, 0, Math.PI * 2);
-  ctx.fill();
-
+  ctx.drawImage(logoImage, leftPadding, brandingCenterY - (logoHeight / 2), logoWidth, logoHeight);
   ctx.restore();
 
-  // Add "WITHSTAIN" text next to logo
-  ctx.fillStyle = COLORS.lime300;
-  ctx.font = 'bold 20px Montserrat'; // Slightly smaller for square format, bold (700)
+  // Add "Withstain" text - editorial style
+  ctx.fillStyle = COLORS.text;
+  ctx.font = '900 20px Merriweather'; // Merriweather Black for brand, smaller for square
   ctx.textBaseline = 'middle';
-  ctx.letterSpacing = '0.1em'; // tracking-widest in Tailwind
-  ctx.fillText('WITHSTAIN', leftPadding + 35, brandingCenterY);
+  ctx.fillText('Withstain', leftPadding + logoWidth + 10, brandingCenterY); // 10px gap after logo
 
   // Reset text baseline for title
   ctx.textBaseline = 'alphabetic';
 
-  // Add title with better spacing for square format
-  ctx.fillStyle = COLORS.zinc100;
-  ctx.font = '52px "Montserrat ExtraBold"'; // Extrabold (800) like site headings, smaller for square format
+  // Add title with editorial typography and shadow effect
+  ctx.fillStyle = COLORS.text;
+  ctx.font = '900 52px Merriweather'; // Merriweather Black, smaller for square format
+
+  // Add text shadow matching blog post style (0 2px 8px rgba(0,0,0,0.15), 0 1px 3px rgba(0,0,0,0.2))
+  ctx.shadowColor = 'rgba(0, 0, 0, 0.2)';
+  ctx.shadowOffsetX = 0;
+  ctx.shadowOffsetY = 2;
+  ctx.shadowBlur = 8;
 
   const maxTitleWidth = CONFIG.twitter.width - (leftPadding * 2);
   const lines = await wrapText(ctx, title, maxTitleWidth);
@@ -450,16 +352,20 @@ async function generateTwitterOGImage(inputPath, title, outputPath) {
     ctx.fillText(line, leftPadding, titleStartY + (index * lineHeight));
   });
 
-  // Add decorative accent line below title
+  // Reset shadow for other elements
+  ctx.shadowColor = 'transparent';
+  ctx.shadowBlur = 0;
+
+  // Add decorative accent line below title - red accent
   const accentY = titleStartY + (lines.length * lineHeight) + 35;
-  ctx.fillStyle = COLORS.lime300;
+  ctx.fillStyle = COLORS.accent;
   ctx.fillRect(leftPadding, accentY, 120, 4);
 
   // Add tagline at bottom
   const bottomPadding = 50;
-  ctx.fillStyle = COLORS.zinc300;
-  ctx.font = '18px Montserrat';
-  ctx.fillText('Evidence-based longevity through modern science', leftPadding, CONFIG.twitter.height - bottomPadding);
+  ctx.fillStyle = COLORS.textSecondary;
+  ctx.font = '18px Inter';
+  ctx.fillText('Practical, resilient longevity through modern science', leftPadding, CONFIG.twitter.height - bottomPadding);
 
   // Convert canvas to buffer and save with sharp
   const buffer = canvas.toBuffer('image/png');

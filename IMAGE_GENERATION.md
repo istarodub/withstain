@@ -10,11 +10,12 @@ The script creates three branded images from a single source image:
 2. **Hero Image** (1200x630px) - For the blog post page with brand overlay
 3. **OG Image** (1200x630px) - For social media sharing with title overlay
 
-All images feature the Withstain brand elements:
-- Zinc-900 dark overlays
-- Lime-300 accents
-- Logo watermark
-- Consistent styling
+All images feature the Withstain editorial brand design:
+- Clean white overlays with subtle gradients
+- Red accent color (#C41E3A)
+- Merriweather serif typography for headings
+- Inter sans-serif for body text
+- Professional editorial aesthetic
 
 ## Installation
 
@@ -148,22 +149,32 @@ npm run build
 ## Design Details
 
 ### Thumbnail
-- Subtle gradient overlay (bottom)
+- Subtle radial vignette for depth
+- Clean and minimal design
 - Maintains image focus
 - Optimized for card views
 
 ### Hero Image
-- Gradient overlay (top to bottom)
-- Logo watermark (top-left)
-- Lime-300 accent circle
-- Dark enough to make white text readable
+- White gradient overlay fading from top to bottom
+- Matches the editorial design of post pages
+- Clean and professional aesthetic
+- Allows content to shine through
 
 ### OG Image
-- Full overlay with gradient
-- Post title in large text (auto-wrapped)
-- "WITHSTAIN" brand name
-- Tagline at bottom
-- Accent line separator
+- Clean white overlay background
+- Actual logo from src/assets/symbol.png with red accent
+- Red decorative accent line
+- Post title in Merriweather Black (64px)
+- "Withstain" brand name in Merriweather Black
+- Tagline at bottom in Inter font
+- Professional editorial design for social sharing
+
+### Twitter Image
+- Square format optimized for Twitter cards
+- Same editorial design as OG image
+- Actual logo from src/assets/symbol.png
+- Slightly smaller fonts for better fit
+- Clean white background with red accents
 
 ## Troubleshooting
 
@@ -205,10 +216,12 @@ The script auto-wraps text, but very long titles (>80 characters) may look cramp
 
 Want to customize the overlays or colors? Edit `scripts/generate-images.js`:
 
-- **Colors**: Change the `COLORS` object
+- **Logo**: The script uses `src/assets/symbol.png` for the logo. Replace this file to use a different logo.
+- **Colors**: Change the `COLORS` object (currently using editorial design: white background, red accent #C41E3A)
+- **Fonts**: Update font registration at the top (currently using Merriweather for headings, Inter for body)
 - **Sizes**: Modify the `CONFIG` object
 - **Overlays**: Adjust gradient stops and opacity
-- **Typography**: Update font sizes in the canvas drawing code
+- **Typography**: Update font sizes and styles in the canvas drawing code
 
 ## Tips for Best Results
 
